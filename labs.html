@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Лабораторні роботи</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 18px; max-width:900px; margin:auto; }
+    h1 { margin-bottom: 8px; }
+    #status { color: #666; margin-bottom: 12px; }
+    ul { padding-left: 20px; }
+    li { margin: 6px 0; }
+    a { text-decoration: none; }
+  </style>
+</head>
+<body>
+  <h1>Лабораторні роботи</h1>
+  <div id="status">Завантаження…</div>
+  <ul id="list"></ul>
+
+  <script>
+    const OWNER = 'Bashmak-1';
+    const REPO  = 'My_site';
+    const FOLDER = 'lab';
+    const API_URL = `https://api.github.com/repos/${OWNER}/${REPO}/contents/${FOLDER}`;
+
+    const statusEl = document.getElementById('status');
+    const listEl = document.getElementById('list');
+
+    async function fetchFiles() {
+      try {
+        const res = await fetch(API_URL);
+        if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
+        const items = await res.json();
+        const files = (items || []).filter(i => i.type === 'file' && i.name.toLowerCase().endsWith('.html'))
+                                    .sort((a,b)=> a.name.localeCompare(b.name, undefined, {numeric:true}));
+        if (files.length === 0) {
+          statusEl.textContent = 'Файлів .html не знайдено у папці ' + FOLDER + '.';
+          return;
+        }
+        statusEl.textContent = `${files.length} файл(ів) знайдено.`;
+        for (const file of files) {
+          const li = document.createElement('li');
+          const relHref = `${FOLDER}/${encodeURIComponent(file.name)}`;
+          const a = document.createElement('a');
+          a.href = relHref;
+          a.textContent = file.name;
+          a.title = file.name;
+          try {
+            const r = await fetch(relHref);
+            if (r.ok) {
+              const text = await r.text();
+              const t = extractTitle(text) || extractH1(text);
+              if (t) { a.textContent = t; a.title = file.name; }
+            } else if (file.download_url) {
+              const r2 = await fetch(file.download_url);
+              if (r2.ok) {
+                const text2 = await r2.text();
+                const t2 = extractTitle(text2) || extractH1(text2);
+                if (t2) { a.textContent = t2; a.title = file.name; }
+              }
+            }
+          } catch (e) {}
+          li.appendChild(a);
+          listEl.appendChild(li);
+        }
+      } catch (err) {
+        statusEl.textContent = 'Помилка при зверненні до GitHub API: ' + err.message;
+      }
+    }
+
+    function extractTitle(html) {
+      const m = html.match(/<title[^>]*>([\s\S]*?)<\/title>/i);
+      return m ? m[1].trim() : null;
+    }
+    function extractH1(html) {
+      const m = html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i);
+      return m ? m[1].replace(/<[^>]+>/g,'').trim() : null;
+    }
+
+    document.addEventListener('DOMContentLoaded', fetchFiles);
+  </script>
+</body>
+</html>
