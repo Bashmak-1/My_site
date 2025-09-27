@@ -81,3 +81,64 @@ th, td {
 th {
   background-color: #333;
 }
+
+
+
+/* Прикол з головним зображенням мене */
+
+.flip-container {
+  perspective: 1000px;
+  width: 200px; 
+  height: 270px;
+  margin-bottom: 15px; /* щоб був відступ від тексту */
+}
+
+.flip-card {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.5s;
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+.flip-container:hover .flip-card {
+  transform: rotateY(180deg);
+}
+
+.flip-front, .flip-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+.flip-front img, .flip-back img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 15px;
+}
+
+.flip-back {
+  transform: rotateY(180deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flip-back img {
+  transform: rotateY(180deg); /* щоб не було дзеркально */
+}
+
+/* Ефект тряски кота */
+.flip-container:hover .angry-cat {
+  animation: shake 0.5s infinite;
+}
+
+@keyframes shake {
+  0%   { transform: translate(0, 0)   rotate(0deg); }
+  25%  { transform: translate(5px, 0) rotate(2deg); }
+  50%  { transform: translate(-5px, 0) rotate(-2deg); }
+  75%  { transform: translate(5px, 0) rotate(1deg); }
+  100% { transform: translate(0, 0)   rotate(0deg); }
+}
