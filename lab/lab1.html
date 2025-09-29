@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Лабораторна №1 – Основи HTML</title>
     <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="css/lab1_style.css" />
+
   </head>
   <body>
 
@@ -30,33 +32,33 @@
         <h2>Форма реєстрації</h2>
         <form id="registerForm" action="https://webhook.site/8d1736d8-d478-44de-a035-c74f1050615e" method="post">
           
-          <label for="fname">Ім’я:</label><br>
-          <input type="text" id="fname" name="fname" required><br><br>
+          <label for="fname">Ім’я</label>
+          <input type="text" id="fname" name="fname" placeholder="Введіть ваше ім’я" required>
 
-          <label for="lname">Прізвище:</label><br>
-          <input type="text" id="lname" name="lname" required><br><br>
+          <label for="lname">Прізвище</label>
+          <input type="text" id="lname" name="lname" placeholder="Введіть ваше прізвище" required>
 
-          <label for="email">Електронна пошта:</label><br>
-          <input type="email" id="email" name="email" required><br><br>
+          <label for="email">Електронна пошта</label>
+          <input type="email" id="email" name="email" placeholder="Наприклад: user@gmail.com" required autofocus>
 
-          <label for="password">Пароль:</label><br>
-          <input type="password" id="password" name="password" required><br><br>
+          <label for="password">Пароль</label>
+          <input type="password" id="password" name="password" placeholder="Мін. 8 символів" required>
 
-          <label for="confirm_password">Підтвердження паролю:</label><br>
-          <input type="password" id="confirm_password" name="confirm_password" required><br><br>
+          <label for="confirm_password">Підтвердження паролю</label>
+          <input type="password" id="confirm_password" name="confirm_password" placeholder="Повторіть пароль" required>
 
-          <label for="birthdate">Дата народження:</label><br>
-          <input type="date" id="birthdate" name="birthdate"><br><br>
+          <label for="birthdate">Дата народження</label>
+          <input type="date" id="birthdate" name="birthdate">
 
-          <label for="gender">Стать:</label><br>
+          <label for="gender">Стать</label>
           <select id="gender" name="gender">
+            <option value="" disabled selected>Оберіть вашу стать</option>
             <option value="male">Чоловіча</option>
             <option value="female">Жіноча</option>
             <option value="other">Інше</option>
-          </select><br><br>
+          </select>
 
           <input type="submit" value="Зареєструватися">
-
         </form>
       </section>
     </main>

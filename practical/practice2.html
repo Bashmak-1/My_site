@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Практична №1 – Основи CSS</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="css/practice2_style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Практичне заняття No2. Основи CSS</h1>
+      <nav>
+        <ul>
+          <li><a href="../index.html">Головна</a></li>
+          <li><a href="../practicals.html">Практичні</a></li>
+          <li><a href="../labs.html">Лабораторки</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section>
+        <h2>Задача</h2>
+        <p>
+          Довільно стилізувати веб-форму з лабораторної роботи No1. Задати для
+          форми такі параметри:
+        </p>
+        <p>
+          a. Колір фону та тексту | b. Ширина та внутрішні відступи | c.
+          Закруглені кути | d. Тінь | e. Позиціювання
+        </p>
+      </section>
+
+      <section>
+        <h2>Форма реєстрації</h2>
+        <form
+          id="registerForm"
+          action="https://webhook.site/8d1736d8-d478-44de-a035-c74f1050615e"
+          method="post"
+        >
+          <label for="fname">Ім’я</label>
+          <input
+            type="text"
+            id="fname"
+            name="fname"
+            placeholder="Введіть ваше ім’я"
+            required
+          />
+
+          <label for="lname">Прізвище</label>
+          <input
+            type="text"
+            id="lname"
+            name="lname"
+            placeholder="Введіть ваше прізвище"
+            required
+          />
+
+          <label for="email">Електронна пошта</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Наприклад: user@gmail.com"
+            required
+            autofocus
+          />
+
+          <label for="password">Пароль</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Мін. 8 символів"
+            required
+          />
+
+          <label for="confirm_password">Підтвердження паролю</label>
+          <input
+            type="password"
+            id="confirm_password"
+            name="confirm_password"
+            placeholder="Повторіть пароль"
+            required
+          />
+
+          <label for="birthdate">Дата народження</label>
+          <input type="date" id="birthdate" name="birthdate" />
+
+          <label for="gender">Стать</label>
+          <select id="gender" name="gender">
+            <option value="" disabled selected>Оберіть вашу стать</option>
+            <option value="male">Чоловіча</option>
+            <option value="female">Жіноча</option>
+            <option value="other">Інше</option>
+          </select>
+
+          <input type="submit" value="Зареєструватися" />
+        </form>
+      </section>
+    </main>
+
+    <footer>
+      <p>
+        © 2025 Барабаш Володимир |
+        <a href="../index.html">Назад до списку лабораторних</a>
+      </p>
+    </footer>
+
+    <script>
+      document
+        .getElementById("registerForm")
+        .addEventListener("submit", function (event) {
+          const password = document.getElementById("password").value;
+          const confirmPassword =
+            document.getElementById("confirm_password").value;
+
+          if (password !== confirmPassword) {
+            event.preventDefault(); // блокує відправку форми
+            alert("Паролі не співпадають!");
+          }
+        });
+    </script>
+  </body>
+</html>

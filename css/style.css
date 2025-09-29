@@ -69,11 +69,14 @@ table {
   color: #fff;
 }
 
-table, th, td {
+table,
+th,
+td {
   border: 1px solid #444;
 }
 
-th, td {
+th,
+td {
   padding: 10px;
   text-align: center;
 }
@@ -82,13 +85,11 @@ th {
   background-color: #333;
 }
 
-
-
 /* Прикол з головним зображенням мене */
 
 .flip-container {
   perspective: 1000px;
-  width: 200px; 
+  width: 200px;
   height: 270px;
   margin-bottom: 15px; /* щоб був відступ від тексту */
 }
@@ -105,14 +106,16 @@ th {
   transform: rotateY(180deg);
 }
 
-.flip-front, .flip-back {
+.flip-front,
+.flip-back {
   position: absolute;
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
 }
 
-.flip-front img, .flip-back img {
+.flip-front img,
+.flip-back img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -136,9 +139,19 @@ th {
 }
 
 @keyframes shake {
-  0%   { transform: translate(0, 0)   rotate(0deg); }
-  25%  { transform: translate(5px, 0) rotate(2deg); }
-  50%  { transform: translate(-5px, 0) rotate(-2deg); }
-  75%  { transform: translate(5px, 0) rotate(1deg); }
-  100% { transform: translate(0, 0)   rotate(0deg); }
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  25% {
+    transform: translate(5px, 0) rotate(2deg);
+  }
+  50% {
+    transform: translate(-5px, 0) rotate(-2deg);
+  }
+  75% {
+    transform: translate(5px, 0) rotate(1deg);
+  }
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
 }
