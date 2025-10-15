@@ -26,7 +26,7 @@ div > p {
 }
 
 /* 5. Елементи з href, що починається з https — зелений */
-*[href^="https"] {
+a[href^="https"] {
     color: green;
 }
 
@@ -48,7 +48,7 @@ div p {
 
 /* 9. input:checked — світло-блакитний фон */
 input:checked {
-    background-color: #e0f7fa;
+    accent-color: #e0f7fa;
 }
 
 /* 10. <a> — прямі діти <li>, підкреслення */
