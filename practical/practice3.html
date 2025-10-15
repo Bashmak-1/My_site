@@ -3,56 +3,150 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YouTube Dark Theme</title>
+    <title>YouTube Dark Theme Clone</title>
     <link rel="stylesheet" href="css/practice3_style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
 </head>
 <body>
+
     <header class="header">
-        <div class="logo">▶ YouTube</div>
-        <input type="text" placeholder="Пошук">
-        <div class="user">B</div>
+        <div class="header-left">
+            <i class="fas fa-bars menu-icon"></i>
+            <div class="logo">
+                <i class="fab fa-youtube logo-icon"></i>
+                <span>YouTube</span>
+            </div>
+        </div>
+        <div class="header-center">
+            <div class="search-bar">
+                <input type="text" placeholder="Пошук">
+                <button class="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+            <button class="mic-btn"><i class="fas fa-microphone"></i></button>
+        </div>
+        <div class="header-right">
+            <i class="fas fa-video"></i>
+            <i class="fas fa-bell"></i>
+            <div class="user-avatar">В</div>
+        </div>
     </header>
 
-    <div class="main">
+    <div class="main-container">
         <aside class="sidebar">
-            <nav>
-                <a href="#">🏠 Головна</a>
-                <a href="#">🎬 Shorts</a>
-                <a href="#">📺 Підписки</a>
-                <a href="#">🎵 YouTube Music</a>
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-link active"><i class="fas fa-home"></i> <span>Головна</span></a>
+                <a href="#" class="nav-link"><i class="fa-solid fa-bolt"></i> <span>Shorts</span></a>
+                <a href="#" class="nav-link"><i class="fas fa-folder-plus"></i> <span>Підписки</span></a>
+                <a href="#" class="nav-link"><i class="fa-brands fa-youtube-square"></i> <span>YouTube Music</span></a>
+            </nav>
+            <hr>
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-link"><i class="fa-solid fa-user"></i> <span>Ваш канал</span></a>
+                <a href="#" class="nav-link"><i class="fas fa-history"></i> <span>Історія</span></a>
+                <a href="#" class="nav-link"><i class="fas fa-play-circle"></i> <span>Ваші відео</span></a>
+                <a href="#" class="nav-link"><i class="fa-regular fa-clock"></i> <span>Переглянути пізніше</span></a>
             </nav>
             <hr>
             <div class="subscriptions">
-                <p>Підписки</p>
-                <a href="#">WAS</a>
-                <a href="#">ROZETKA</a>
-                <a href="#">Хащі</a>
+                <h3 class="sidebar-title">Підписки</h3>
+                <a href="#" class="nav-link"><img src="https://yt3.ggpht.com/ytc/AIdro_miypPcdt_1d9_GCGXzkAsGyVRRkHXZu89089MhKvuLZw=s88-c-k-c0x00ffffff-no-rj" alt="avatar"> <span>dreamscape</span></a>
+                <a href="#" class="nav-link"><img src="https://yt3.ggpht.com/ytc/AIdro_mEZ8F-WsEG-x5jybRo9ehenzzPEP_irgq1zgEjv5Dx_Mw=s88-c-k-c0x00ffffff-no-rj" alt="avatar"> <span>ТУЧНЫЙ ЖАБ</span></a>
+                <a href="#" class="nav-link"><img src="https://yt3.ggpht.com/8hgTZl7SqLJE9TYpBGuOgivXG4-fCvPOjafUv37tEI4CuAh36JNBuKQZSXlgMDNHxvgXq4MpHg=s88-c-k-c0x00ffffff-no-rj" alt="avatar"> <span>SUDNO</span></a>
+                <a href="#" class="nav-link"><img src="https://yt3.ggpht.com/tq4XuYC4pOO3_4DV91XGS24Uk5Ya7tpOcFfoEzJUtSug65cYb7gnrYAteKavyy-MCEjPeCm2bfc=s88-c-k-c0x00ffffff-no-rj" alt="avatar"> <span>Елис</span></a>
             </div>
         </aside>
 
-        <section class="content">
-            <div class="tags">
-                <button>Усі</button>
-                <button>Ігри</button>
-                <button>Музика</button>
-                <button>Новини</button>
-            </div>
+        <main class="content-wrapper">
+            <div class="tags-bar">
+                </div>
 
-            <div class="videos">
+            <section class="videos-grid">
                 <div class="video-card">
-                    <img src="https://via.placeholder.com/320x180" alt="">
-                    <p>Як збільшився борг України...</p>
+                    <div class="thumbnail">
+                        <img src="https://i.ytimg.com/vi/J7wsJ1_FlPk/hq720.jpg?sqp=-oaymwEnCNAFEJQDSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLBJh7OT6ss_EIAWcOfolqh1XAQ0HA" alt="Video thumbnail">
+                    </div>
+                    <div class="video-details">
+                        <img class="channel-avatar" src="https://via.placeholder.com/36/1" alt="Channel avatar">
+                        <div class="video-info">
+                            <h4 class="video-title">1 HOUR Montagem FUNK X PHONK Mix For Your Leveling</h4>
+                            <p class="channel-name">remixstation</p>
+                            <p class="video-meta">243 тис. переглядів • 2 місяці тому</p>
+                        </div>
+                    </div>
                 </div>
+
                 <div class="video-card">
-                    <img src="https://via.placeholder.com/320x180" alt="">
-                    <p>Що бісить журналістку...</p>
+                    <div class="thumbnail">
+                        <img src="https://via.placeholder.com/320x180/2" alt="Video thumbnail">
+                    </div>
+                    <div class="video-details">
+                        <img class="channel-avatar" src="https://via.placeholder.com/36/2" alt="Channel avatar">
+                        <div class="video-info">
+                            <h4 class="video-title">TF2 players are menacing</h4>
+                            <p class="channel-name">imgigz</p>
+                            <p class="video-meta">1 млн переглядів • 1 рік тому</p>
+                        </div>
+                    </div>
                 </div>
+
                 <div class="video-card">
-                    <img src="https://via.placeholder.com/320x180" alt="">
-                    <p>Neo-Brutalism: The Rising Design Trend</p>
+                    <div class="thumbnail">
+                        <img src="https://via.placeholder.com/320x180/3" alt="Video thumbnail">
+                    </div>
+                    <div class="video-details">
+                        <img class="channel-avatar" src="https://via.placeholder.com/36/3" alt="Channel avatar">
+                        <div class="video-info">
+                            <h4 class="video-title">Менеджер Заставил Выйти На Работу, Хотя у Меня Было Сильное Пищевое Отравление. Поэтому я...</h4>
+                            <p class="channel-name">Лучшая Жизнь</p>
+                            <p class="video-meta">214 тис. переглядів • 2 місяці тому</p>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </section>
+
+                <div class="video-card">
+                    <div class="thumbnail">
+                        <img src="https://via.placeholder.com/320x180/4" alt="Video thumbnail">
+                    </div>
+                    <div class="video-details">
+                        <img class="channel-avatar" src="https://via.placeholder.com/36/4" alt="Channel avatar">
+                        <div class="video-info">
+                            <h4 class="video-title">Typical cat behavior, nothing more</h4>
+                            <p class="channel-name">CAT BRAIN exe</p>
+                            <p class="video-meta">5,2 млн переглядів • 9 місяців тому</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="thumbnail">
+                        <img src="https://via.placeholder.com/320x180/5" alt="Video thumbnail">
+                    </div>
+                    <div class="video-details">
+                        <img class="channel-avatar" src="https://via.placeholder.com/36/5" alt="Channel avatar">
+                        <div class="video-info">
+                            <h4 class="video-title">APURTUM - B3YOND | Visualizer | #dark #darkphonk</h4>
+                            <p class="channel-name">B3YOND</p>
+                            <p class="video-meta">1,1 тис. переглядів • 1 день тому</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="thumbnail">
+                        <img src="https://via.placeholder.com/320x180/6" alt="Video thumbnail">
+                    </div>
+                    <div class="video-details">
+                        <img class="channel-avatar" src="https://via.placeholder.com/36/6" alt="Channel avatar">
+                        <div class="video-info">
+                            <h4 class="video-title">(Не)надежные генераторы случайных чисел в C++</h4>
+                            <p class="channel-name">Хауди Хо™ - Просто о мире IT!</p>
+                            <p class="video-meta">43 тис. переглядів • 6 днів тому</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
     </div>
+
 </body>
 </html>
