@@ -1,0 +1,110 @@
+/* Базові налаштування */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #0f0f0f;
+    color: #fff;
+}
+
+/* Верхня панель */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #202020;
+    padding: 10px 20px;
+}
+
+.header input {
+    width: 40%;
+    padding: 8px;
+    background-color: #121212;
+    border: 1px solid #333;
+    color: white;
+}
+
+.user {
+    background-color: #4b4b4b;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Головна частина */
+.main {
+    display: flex;
+}
+
+/* Ліва панель */
+.sidebar {
+    width: 220px;
+    background-color: #181818;
+    height: 100vh;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.sidebar nav a, .subscriptions a {
+    display: block;
+    color: #ccc;
+    padding: 8px 0;
+    text-decoration: none;
+}
+
+.sidebar nav a:hover, .subscriptions a:hover {
+    color: white;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid #333;
+}
+
+/* Контент */
+.content {
+    flex: 1;
+    padding: 20px;
+}
+
+.tags {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.tags button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 16px;
+    cursor: pointer;
+}
+
+.tags button:hover {
+    background-color: #555;
+}
+
+/* Відео */
+.videos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.video-card {
+    width: 320px;
+}
+
+.video-card img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.video-card p {
+    margin-top: 8px;
+    font-size: 14px;
+}
