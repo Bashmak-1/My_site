@@ -4,6 +4,9 @@ body {
     font-family: "Roboto", Arial, sans-serif; /* Більш схожий шрифт */
     background-color: #0f0f0f;
     color: #fff;
+
+    overflow: hidden; 
+    height: 100vh;
 }
 
 /* ================= HEADER ================= */
@@ -103,6 +106,8 @@ body {
 /* ================= MAIN CONTAINER ================= */
 .main-container {
     display: flex;
+    /* Висота екрану мінус висота хедера (приблизно 60px) */
+    height: calc(100vh - 60px);
 }
 
 /* ================= SIDEBAR ================= */
@@ -111,9 +116,22 @@ body {
     background-color: #0f0f0f;
     padding: 10px;
     box-sizing: border-box;
-    height: calc(100vh - 60px); /* Висота мінус хедер */
-    position: sticky;
-    top: 60px; /* Позиція під хедером */
+    
+    /* Змінюємо налаштування висоти та скролу */
+    height: 100%; /* На всю висоту контейнера */
+    overflow-y: auto; /* Вмикаємо вертикальну прокрутку */
+}
+
+/* (За бажанням) Робимо скролбар тоншим і красивішим, як на YouTube */
+.sidebar::-webkit-scrollbar {
+    width: 8px;
+}
+.sidebar::-webkit-scrollbar-thumb {
+    background-color: #717171;
+    border-radius: 4px;
+}
+.sidebar:hover::-webkit-scrollbar-thumb {
+    background-color: #a0a0a0;
 }
 
 .sidebar-nav {
@@ -167,19 +185,21 @@ hr {
 .content-wrapper {
     flex: 1;
     padding: 0px;
-    overflow-y: auto;
+    /* Вмикаємо скрол для відео */
+    overflow-y: auto; 
+    height: 100%;
 }
 
 .tags-bar {
     display: flex;
     gap: 12px;
-    /* margin-bottom: 24px; */
     position: sticky;
-    top: 0;
-    background-color: #0f0f0f;
-
-    padding: 12px 24px; 
     
+    /* ВАЖЛИВО: повертаємо 0, бо він липне до верху content-wrapper */
+    top: 0; 
+    
+    background-color: #0f0f0f;
+    padding: 12px 24px;
     z-index: 5;
     overflow-x: auto;
     white-space: nowrap;
