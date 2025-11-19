@@ -184,26 +184,26 @@ hr {
 /* ================= CONTENT ================= */
 .content-wrapper {
     flex: 1;
-    padding: 0px;
-    /* Вмикаємо скрол для відео */
-    overflow-y: auto; 
-    height: 100%;
+    display: flex;           /* Вмикаємо Flexbox */
+    flex-direction: column;  /* Елементи стають в колонку (Теги зверху, Відео знизу) */
+    overflow: hidden;        /* Забороняємо скрол самого контейнера */
+    background-color: #0f0f0f;
+    padding: 0;
 }
 
 .tags-bar {
     display: flex;
     gap: 12px;
-    position: sticky;
-    
-    /* ВАЖЛИВО: повертаємо 0, бо він липне до верху content-wrapper */
-    top: 0; 
-    
-    background-color: #0f0f0f;
     padding: 12px 24px;
-    z-index: 5;
+    background-color: #0f0f0f;
+    
+    /* Для горизонтального скролу самих кнопок */
     overflow-x: auto;
     white-space: nowrap;
     scrollbar-width: none;
+    
+    flex-shrink: 0; /* Важливо: забороняємо стискати меню тегів */
+    z-index: 5;
 }
 
 /* Приховуємо смугу прокрутки для Chrome, Safari та Opera */
@@ -234,11 +234,37 @@ hr {
 /* ================= VIDEOS GRID ================= */
 .videos-grid {
     display: grid;
-    /* Створюємо колонки, які автоматично заповнюють простір */
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 20px 16px;
-        
-    padding: 24px; 
+    padding: 24px;
+    
+    /* Вмикаємо вертикальний скрол ТІЛЬКИ для відео */
+    overflow-y: auto;
+    /* Цей блок займає все вільне місце, що залишилось після тегів */
+    flex-grow: 1; 
+}
+
+/* === СТИЛІ ДЛЯ ТЕМНОГО СКРОЛБАРУ === */
+
+/* Ширина скролбару */
+.videos-grid::-webkit-scrollbar {
+    width: 8px;
+}
+
+/* Фон скролбару (трек) */
+.videos-grid::-webkit-scrollbar-track {
+    background: #0f0f0f; 
+}
+
+/* Сам повзунок (thumb) */
+.videos-grid::-webkit-scrollbar-thumb {
+    background-color: #717171; /* Темно-сірий колір */
+    border-radius: 4px;        /* Закруглені краї */
+}
+
+/* Колір повзунка при наведенні мишкою */
+.videos-grid::-webkit-scrollbar-thumb:hover {
+    background-color: #a0a0a0; /* Трохи світліший */
 }
 
 .video-card {
