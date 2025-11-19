@@ -66,6 +66,12 @@ body {
     border-radius: 40px 0 0 40px; /* Скруглення тільки зліва */
 }
 
+/* Прибираємо білу обводку і робимо синю рамку як в YouTube */
+.search-bar input:focus {
+    outline: none;       /* Прибирає ту саму білу лінію */
+    border: 1px solid #1c62b9; /* Додає синю рамку */
+}
+
 .search-bar .search-btn {
     padding: 0 20px;
     background-color: #222222;
