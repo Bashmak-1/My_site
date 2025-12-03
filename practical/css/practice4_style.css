@@ -1,12 +1,11 @@
 :root {
-    --key-bg: rgba(0, 0, 0, 0.4); 
-    --key-hover: rgba(50, 255, 50, 0.2); 
-    --key-active: rgba(50, 255, 50, 0.5); 
-    --text-color: rgba(255, 255, 255, 0.9);
+    /* Робимо кнопки напівпрозорими червоними, щоб їх було гарно видно на фоні чорної клави */
+    --key-bg: rgba(255, 0, 0, 0.3); 
+    --text-color: white;
 }
 
 body {
-    background-color: #1a1a1a; /* Темний фон сторінки */
+    background-color: #222;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -17,97 +16,77 @@ body {
 
 .keyboard {
     position: relative;
+    /* Твій шлях до картинки */
     background-image: url('../../images/hator-icefall-mecha-origin-red-linear-htk104ua-black.jpg');
     background-size: 100% 100%;
-    background-position: center;
     background-repeat: no-repeat;
     
-    /* 1. РОЗМІРИ: */
-    /* Змінюй ширину і висоту, щоб сітка розтягнулася на всю картинку */
-    width: 1250px;  /* Спробуй +/- 50px */
-    height: 390px;  /* Спробуй +/- 20px */
-    
-    /* 2. ВІДСТУПИ (РАМКА): */
-    /* Це найважливіше! Це рухає всю сітку кнопок відносно країв картинки. */
-    /* Порядок: Верх, Право, Низ, Ліво */
-    padding: 23px 25px 25px 25px; 
+    /* 1. Додай цей рядок. Це найголовніше! */
+    box-sizing: border-box;
 
-    display: grid;
-    /* 23 колонки - це стандарт, не змінюй */
-    grid-template-columns: repeat(23, 1fr); 
-    grid-template-rows: repeat(6, 1fr);
+    /* 2. Зафіксуй розміри (підібрані під твоє фото HATOR) */
+    width: 1750px;
+    height: 480px; /* Висота має залишатися незмінною */
+
+    /* 3. Тепер сміливо збільшуй padding-top. 
+       Він опустить кнопки, але САМ БЛОК не виросте. */
+    padding-top: 60px; /* <--- Крути це число, щоб Esc сів на місце */
     
-    /* 3. ПРОМІЖКИ МІЖ КНОПКАМИ: */
-    /* Якщо кнопки занадто злиплі або розкидані */
+    padding-left: 30px; /* Відступ зліва */
+    padding-right: 35px;
+
+    /* Інші налаштування залишаємо */
+    background-image: url('../../images/hator-icefall-mecha-origin-red-linear-htk104ua-black.jpg');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    
+    display: grid;
+    /* Якщо нижні ряди "наїжджають" вгору, збільш трохи gap */
     gap: 5px; 
+    
+    grid-template-columns: repeat(21, 1fr); 
+    grid-template-rows: repeat(6, 1fr);
 }
 
 .key {
     background-color: var(--key-bg);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 5px;
     color: var(--text-color);
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: bold;
     cursor: pointer;
     user-select: none;
-    transition: all 0.1s ease;
-    box-shadow: 0 3px 0 rgba(0,0,0,0.5), 0 4px 5px rgba(0,0,0,0.3);
-    text-shadow: 0 1px 2px #000;
 }
 
-.key:hover {
-    background-color: var(--key-hover);
-    transform: translateY(1px);
-    box-shadow: 0 2px 0 rgba(0,0,0,0.5);
-    border-color: #00ff00;
-    color: #fff;
-}
+/* === НАЛАШТУВАННЯ КОНКРЕТНИХ КЛАВІШ === */
 
-.key:active {
-    transform: translateY(3px);
-    box-shadow: inset 0 2px 5px rgba(0,0,0,0.5);
-    background-color: var(--key-active);
-}
-
-/* Спеціальні кнопки */
-.key-backspace { grid-column: span 2; }
-.key-tab { grid-column: span 1.5; }
-.key-slash { grid-column: span 1.5; }
-.key-caps { grid-column: span 1.75; }
-.key-enter { grid-column: span 2.25; }
-.key-lshift { grid-column: span 2.25; }
-.key-rshift { grid-column: span 2.75; }
-.key-ctrl { grid-column: span 1.25; }
-.key-space { grid-column: span 7.5; }
-.key-num-plus, .key-num-enter { grid-row: span 2; }
-.key-num-0 { grid-column: span 2; }
-.empty-space { pointer-events: none; }
-
-
-/* Відступ для F-клавіш (після F4 та F8) */
-.f-group { 
-    margin-right: 25px; /* Збільшуй, якщо треба розсунути F-ки */
-}
-
-/* Відступ після Esc */
-.key-esc { 
+/* 3. ВІДСТУП ПІСЛЯ ESC */
+.key-esc {
+    /* Esc займає 1 клітинку */
+    grid-column: span 1; 
+    
+    /* ВІДСТУП: Змінюй це число, щоб F1 відсунулася від Esc */
     margin-right: 35px; 
-    grid-column: span 1.75;
 }
 
-/* === ВІДСТУПИ МІЖ БЛОКАМИ КЛАВІАТУРИ === */
-
-/* Кнопки, після яких йде порожнє місце (щоб відділити стрілочки та NumPad) */
-/* Це: Backspace, \, Enter, Shift, Ctrl правий */
-.key-backspace, .key-slash, .key-enter, .key-rshift, .key-ctrl-right {
-    margin-right: 15px; /* Це відсуне блок Insert/Home/PgUp */
+/* Групи F-клавіш */
+.f-group {
+    margin-right: 20px; /* Відступ після F4 та F8 */
 }
 
-/* Кнопки блоку навігації, щоб відсунути NumPad ще далі */
-.key-pgup, .key-pgdn, .key-right, .key-arrow-right {
-    margin-right: 15px; /* Це відсуне NumPad */
-}
+/* Інші широкі кнопки (поки стандартні налаштування) */
+.key-backspace { grid-column: span 2; margin-left: 5px; }
+.key-tab { grid-column: span 1.5; }
+.key-caps { grid-column: span 1.8; }
+.key-enter { grid-column: span 2.2; }
+.key-lshift { grid-column: span 2.3; }
+.key-rshift { grid-column: span 2.7; }
+.key-space { grid-column: span 7; }
+.key-ctrl { grid-column: span 1.3; }
+
+/* Приховуємо порожні блоки, щоб не заважали */
+.empty-space { opacity: 0; pointer-events: none; }
