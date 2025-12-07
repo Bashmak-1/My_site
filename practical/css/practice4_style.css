@@ -1,7 +1,8 @@
 :root {
-    /* Робимо кнопки напівпрозорими червоними, щоб їх було гарно видно на фоні чорної клави */
-    --key-bg: rgba(255, 0, 0, 0.3); 
+    --key-bg: rgba(255, 0, 0, 0.2); 
     --text-color: white;
+    /* Відступи між клавішами */
+    --gap-size: 4px;
 }
 
 body {
@@ -14,79 +15,147 @@ body {
     font-family: 'Roboto Mono', monospace;
 }
 
-.keyboard {
+/* === ГОЛОВНИЙ КОНТЕЙНЕР (Корпус) === */
+.keyboard-case {
     position: relative;
-    /* Твій шлях до картинки */
-    background-image: url('../../images/hator-icefall-mecha-origin-red-linear-htk104ua-black.jpg');
+    background-image: url('../../images/hator-icefall-mecha-origin-red-linear-htk104ua-black.jpg'); /* Перевір шлях! */
     background-size: 100% 100%;
-    background-repeat: no-repeat;
-    
-    /* 1. Додай цей рядок. Це найголовніше! */
-    box-sizing: border-box;
-
-    /* 2. Зафіксуй розміри (підібрані під твоє фото HATOR) */
     width: 1750px;
-    height: 480px; /* Висота має залишатися незмінною */
+    height: 480px;
+    box-sizing: border-box;
+    
+    /* Внутрішні відступи корпусу, щоб контент не прилипав до країв картинки */
+    padding: 60px 30px 30px 35px;
 
-    /* 3. Тепер сміливо збільшуй padding-top. 
-       Він опустить кнопки, але САМ БЛОК не виросте. */
-    padding-top: 60px; /* <--- Крути це число, щоб Esc сів на місце */
-    
-    padding-left: 30px; /* Відступ зліва */
-    padding-right: 35px;
-
-    /* Інші налаштування залишаємо */
-    background-image: url('../../images/hator-icefall-mecha-origin-red-linear-htk104ua-black.jpg');
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    
-    display: grid;
-    /* Якщо нижні ряди "наїжджають" вгору, збільш трохи gap */
-    gap: 5px; 
-    
-    grid-template-columns: repeat(21, 1fr); 
-    grid-template-rows: repeat(6, 1fr);
+    /* Робимо Flex, щоб розбити на 3 великі колонки */
+    display: flex;
+    gap: 15px; /* Відстань між основним блоком, стрілками та нампадом */
 }
 
+/* === ЗАГАЛЬНІ СТИЛІ КЛАВІШ === */
 .key {
     background-color: var(--key-bg);
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
     color: var(--text-color);
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: bold;
     cursor: pointer;
     user-select: none;
+    box-shadow: 0 0 5px rgba(0,0,0,0.5); /* Вимога №3: Тіні */
+    transition: all 0.1s;
 }
 
-/* === НАЛАШТУВАННЯ КОНКРЕТНИХ КЛАВІШ === */
+.key:active {
+    transform: translateY(2px);
+    background-color: rgba(255, 0, 0, 0.5);
+}
 
-/* 3. ВІДСТУП ПІСЛЯ ESC */
+/* === ЛІВА КОЛОНКА (F-ряд + Літери) === */
+.column-left {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Відстань між F-клавішами та цифрами */
+    width: 60%; /* Приблизна ширина основної частини */
+}
+
+/* 1. Секція F-клавіш */
+.section-f-keys {
+    display: flex;
+    justify-content: space-between; /* Розтягує групи по ширині */
+}
+.f-block {
+    display: flex;
+    gap: var(--gap-size);
+}
 .key-esc {
-    /* Esc займає 1 клітинку */
-    grid-column: span 1; 
-    
-    /* ВІДСТУП: Змінюй це число, щоб F1 відсунулася від Esc */
-    margin-right: 35px; 
+    width: 60px; /* Фіксована ширина для Esc */
+    margin-right: 30px; /* Відступ після Esc */
 }
 
-/* Групи F-клавіш */
-.f-group {
-    margin-right: 20px; /* Відступ після F4 та F8 */
+/* 5. Основна секція (Grid 60x5) 
+   Чому 60? Це найменше спільне число, щоб зробити кнопки 1.25, 1.5, 2.25 ширини
+   але простіше використати 15 колонок і дроби, або просто repeat(15, 1fr)
+*/
+.section-main {
+    display: grid;
+    grid-template-columns: repeat(30, 1fr); /* 30 клітинок на рядок для точності */
+    grid-template-rows: repeat(5, 55px); /* Висота ряду */
+    gap: var(--gap-size);
 }
 
-/* Інші широкі кнопки (поки стандартні налаштування) */
-.key-backspace { grid-column: span 2; margin-left: 5px; }
-.key-tab { grid-column: span 1.5; }
-.key-caps { grid-column: span 1.8; }
-.key-enter { grid-column: span 2.2; }
-.key-lshift { grid-column: span 2.3; }
-.key-rshift { grid-column: span 2.7; }
-.key-space { grid-column: span 7; }
-.key-ctrl { grid-column: span 1.3; }
+/* Налаштування ширини кнопок в основному блоці (span) */
+.section-main .key { grid-column: span 2; } /* Звичайна кнопка = 2 клітинки */
 
-/* Приховуємо порожні блоки, щоб не заважали */
-.empty-space { opacity: 0; pointer-events: none; }
+.key-backspace { grid-column: span 4 !important; }
+.key-tab       { grid-column: span 3 !important; }
+.key-slash     { grid-column: span 3 !important; }
+.key-caps      { grid-column: span 4 !important; } /* Трохи менше 2 звичайних */
+.key-enter     { grid-column: span 4 !important; } /* Широка */
+.key-lshift    { grid-column: span 5 !important; }
+.key-rshift    { grid-column: span 5 !important; }
+
+.key-ctrl, .key-alt, .key-win, .key-fn, .key-ctx { grid-column: span 3 !important; }
+.key-space     { grid-column: span 13 !important; } /* Пробіл */
+
+
+/* === СЕРЕДНЯ КОЛОНКА (Системні + Стрілки) === */
+.column-middle {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Розсовує верхній блок і стрілки по вертикалі */
+    width: 15%;
+}
+
+/* 2. Секція Системних (PrtSc...PgDn) */
+.section-system {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 55px); /* 3 ряди */
+    gap: var(--gap-size);
+    margin-bottom: 30px; /* Щоб PrtSc блок не прилипав до Ins */
+}
+/* Щоб відділити PrtSc від Ins (робимо відступ після першого ряду) */
+.section-system .key:nth-child(3) {
+    margin-bottom: 25px; /* "Костиль" для відступу, або розбити на 2 гріди */
+}
+/* Краще рішення для PrtSc - додати margin-bottom самому контейнеру, якщо розбити. 
+   Але поки лишимо так. */
+
+/* 3. Секція Стрілок */
+.section-arrows {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 55px);
+    gap: var(--gap-size);
+    margin-top: auto; /* Притиснути до низу */
+}
+
+/* === ПРАВА КОЛОНКА (Нампад) === */
+.column-right {
+    width: 20%;
+}
+
+/* 4. Секція Нампаду */
+.section-numpad {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 55px);
+    gap: var(--gap-size);
+    margin-top: 55px; /* Опускаємо нампад вниз, бо там немає F-клавіш над ним (індикатори) */
+}
+
+.key-plus {
+    grid-row: span 2; /* Високий плюс */
+    height: 100%;
+}
+.key-enter-num {
+    grid-row: span 2; /* Високий Ентер */
+    height: 100%;
+}
+.key-zero {
+    grid-column: span 2; /* Широкий нуль */
+}
