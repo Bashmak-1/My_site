@@ -75,8 +75,8 @@ body {
 
 /* Індивідуальні відступи для F-груп */
 .key-esc { width: 60px; margin-right: 90px; } /* Відступ після ESC */
-.f-block { display: flex; gap: var(--gap-size); margin-right: 35px; } /* Відступ між групами F */
-.f-block .key { width: 60px; } /* Ширина F кнопок */
+.f-block { display: flex; gap: var(--gap-size); margin-right: 45px; } /* Відступ між групами F */
+.f-block .key { width: 60px; margin-right: 5px;} /* Ширина F кнопок */
 
 
 /* ОСНОВНИЙ БЛОК (СІТКА 60) */
