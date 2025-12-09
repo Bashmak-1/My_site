@@ -70,7 +70,7 @@ body {
 .section-f-keys {
     display: flex;
     height: var(--key-height);
-    margin-bottom: 25px; /* ВІДСТУП: Від F-клавіш до цифр 1,2,3... */
+    margin-bottom: 45px; /* ВІДСТУП: Від F-клавіш до цифр 1,2,3... */
 }
 
 /* Індивідуальні відступи для F-груп */
@@ -99,10 +99,12 @@ body {
 .key-enter     { grid-column: span 9 !important; } /* 2.25x */
 .key-lshift    { grid-column: span 9 !important; } /* 2.25x */
 .key-rshift    { grid-column: span 11 !important; } /* 2.75x */
+.key-lctrl    { grid-column: span 5 !important; } /* 2.75x */
+.key-rctrl    { grid-column: span 5 !important; } /* 2.75x */
 
 /* Нижній ряд */
-.key-ctrl, .key-win, .key-alt, .key-fn, .key-ctx { 
-    grid-column: span 5 !important; /* 1.25x */
+.key-win, .key-alt, .key-fn, .key-ctx { 
+    grid-column: span 6 !important; /* 1.25x */
 }
 .key-space { 
     grid-column: span 25 !important; /* 6.25x - Пробіл */
