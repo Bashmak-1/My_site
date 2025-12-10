@@ -77,9 +77,10 @@ body {
 .section-f-keys {
     display: flex;
     gap: var(--gap-size);
-    margin-bottom: 25px; 
+    margin-bottom: 20px; 
     /* Додаткова гарантія, що ширина буде по вмісту */
-    width: fit-content; 
+    /* width: fit-content;  */
+    width: 100%;
 }   
 
 .key-esc { width: var(--key-base); }
@@ -90,6 +91,9 @@ body {
     gap: var(--gap-size);
     margin-right: calc(var(--key-base) * 0.5);
 }
+.f-rblock {
+    margin-right: 0px;
+}
 .f-block .key { width: var(--key-base); }
 
 .section-main {
@@ -99,7 +103,8 @@ body {
     /* grid-template-rows: repeat(5, var(--key-base)); <- видалено */
     grid-auto-rows: var(--key-base); /* Всі ряди по 50px */
     gap: var(--gap-size);
-    width: calc((15 * var(--key-base)) + (14 * var(--gap-size)));
+    /* width: calc((15 * var(--key-base)) + (14 * var(--gap-size))); */
+    width: 100%;
 }
 
 .section-main .key { grid-column: span 4; }
