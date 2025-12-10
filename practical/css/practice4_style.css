@@ -77,10 +77,10 @@ body {
 .section-f-keys {
     display: flex;
     gap: var(--gap-size);
-    /* Цей відступ (margin-bottom) відокремлює F-ряд від цифр. 
-       Він має бути таким самим для сусідніх колонок! */
     margin-bottom: 25px; 
-}
+    /* ВИПРАВЛЕННЯ 1: Ширина тепер по вмісту, а не на всю стрічку */
+    width: fit-content; 
+}   
 
 .key-esc { width: var(--key-base); }
 .f-gap { width: var(--key-base); }
@@ -158,14 +158,19 @@ body {
 
 /* ПАНЕЛЬ ЛАМПОЧОК */
 .led-panel {
-    /* Висота розрахована так, щоб заповнити простір F-ряду + відступу */
     height: calc(var(--key-base) + 25px); 
     display: flex;
-    justify-content: flex-end; /* Лампочки зазвичай праворуч */
-    align-items: center;       /* Центруємо вертикально в цьому блоці */
-    gap: 15px;                 /* Відстань між групами лампочок */
-    padding-right: 5px;
+    
+    /* ВИПРАВЛЕННЯ 2: Рівномірний розподіл по всій ширині */
+    justify-content: space-around; 
+    align-items: center;       
+    
+    /* Прибираємо жорсткі відступи справа та gap, бо space-around сам все розрахує */
+    /* gap: 15px;  <- видалено */
+    /* padding-right: 5px; <- видалено */
+    
     margin-bottom: var(--gap-size);
+    width: 100%; /* Гарантуємо, що панель займає всю ширину нампаду */
 }
 
 .led-group {
@@ -173,6 +178,8 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 5px;
+    /* Можна додати мінімальну ширину, щоб клік по області був точнішим, якщо треба */
+    width: 30%; 
 }
 
 .led-label {
