@@ -253,3 +253,12 @@ body {
     border: 2px solid #555;
     opacity: 0.7;
 }
+
+/* === КЛАС ДЛЯ JS-НАТИСКАННЯ === */
+/* Це копія стилів .key:active, щоб працювало від клавіатури */
+.key.pressed {
+    transform: translateY(4px);
+    box-shadow: 0 0 0 #000;
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+}
