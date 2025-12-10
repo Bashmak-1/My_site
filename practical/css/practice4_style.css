@@ -6,7 +6,6 @@
     --text-color: #eee;
     --accent-color: #ff3333;
     
-    /* Колір лампочок (блакитний неон, як на фото Hator) */
     --led-off: #333;
     --led-on: #00eaff; 
     --led-glow: rgba(0, 234, 255, 0.6);
@@ -37,7 +36,6 @@ body {
     border-bottom: 8px solid #000;
     display: flex;
     gap: var(--section-gap);
-    /* Забороняємо виділення тексту на всій клавіатурі */
     user-select: none; 
 }
 
@@ -72,13 +70,15 @@ body {
     display: flex;
     flex-direction: column;
     gap: var(--gap-size);
+    /* ВИПРАВЛЕННЯ 1: Це не дає F-ряду розтягуватись на всю ширину */
+    align-items: flex-start;
 }
 
 .section-f-keys {
     display: flex;
     gap: var(--gap-size);
     margin-bottom: 25px; 
-    /* ВИПРАВЛЕННЯ 1: Ширина тепер по вмісту, а не на всю стрічку */
+    /* Додаткова гарантія, що ширина буде по вмісту */
     width: fit-content; 
 }   
 
@@ -95,7 +95,9 @@ body {
 .section-main {
     display: grid;
     grid-template-columns: repeat(60, 1fr); 
-    grid-template-rows: repeat(5, var(--key-base));
+    /* Прибираємо фіксовані рядки, нехай Grid сам формує */
+    /* grid-template-rows: repeat(5, var(--key-base)); <- видалено */
+    grid-auto-rows: var(--key-base); /* Всі ряди по 50px */
     gap: var(--gap-size);
     width: calc((15 * var(--key-base)) + (14 * var(--gap-size)));
 }
@@ -108,8 +110,30 @@ body {
 .key-enter     { grid-column: span 9 !important; }
 .key-lshift    { grid-column: span 9 !important; }
 .key-rshift    { grid-column: span 11 !important; }
-.key-lctrl, .key-rctrl, .key-win, .key-alt, .key-fn, .key-ctx { grid-column: span 5 !important; }
-.key-space { grid-column: span 25 !important; }
+
+/* === НОВИЙ НИЖНІЙ РЯД (FLEX) === */
+.row-bottom {
+    /* Кажемо Гріду: цей блок займає всі 60 колонок (весь рядок) */
+    grid-column: 1 / -1; 
+    
+    display: flex;
+    justify-content: space-between; /* Розподілити по краях */
+    gap: var(--gap-size);
+    width: 100%; /* Зайняти всю доступну ширину Гріда */
+}
+
+/* Кнопки модифікатори (Ctrl, Alt...) - фіксована ширина ~1.25u */
+.row-bottom .key-mod {
+    width: 65px; 
+    flex-shrink: 0; /* Не стискатись */
+}
+
+/* ПРОБІЛ - МАГІЯ ТУТ */
+.key-space {
+    flex-grow: 1; /* Займає ВЕСЬ простір, що залишився */
+    width: auto;
+}
+
 
 /* =========================================
    2. СЕРЕДНЯ КОЛОНКА
@@ -120,22 +144,18 @@ body {
     width: calc(3 * var(--key-base) + 2 * var(--gap-size));
 }
 
-/* Верхній блок (Prt, Scr, Pau) - тепер вирівняний з F-клавішами */
 .section-sys-top {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: var(--gap-size);
-    /* Важливо: такий самий відступ вниз, як у section-f-keys */
     margin-bottom: 25px; 
 }
 
-/* Основний блок навігації (Ins, Home, PgUp...) */
 .section-sys-main {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, var(--key-base));
     gap: var(--gap-size);
-    /* Видаляємо старий margin-top, тепер все регулюється margin-bottom зверху */
 }
 
 .section-arrows {
@@ -148,7 +168,7 @@ body {
 .empty { visibility: hidden; }
 
 /* =========================================
-   3. ПРАВА КОЛОНКА (Нампад + LED)
+   3. ПРАВА КОЛОНКА
    ========================================= */
 .column-right {
     display: flex;
@@ -160,17 +180,13 @@ body {
 .led-panel {
     height: calc(var(--key-base) + 25px); 
     display: flex;
-    
-    /* ВИПРАВЛЕННЯ 2: Рівномірний розподіл по всій ширині */
-    justify-content: space-around; 
+    /* ВИПРАВЛЕННЯ 2: Рівномірно по ширині (краще ніж space-around) */
+    justify-content: space-between; 
     align-items: center;       
-    
-    /* Прибираємо жорсткі відступи справа та gap, бо space-around сам все розрахує */
-    /* gap: 15px;  <- видалено */
-    /* padding-right: 5px; <- видалено */
-    
     margin-bottom: var(--gap-size);
-    width: 100%; /* Гарантуємо, що панель займає всю ширину нампаду */
+    width: 100%; 
+    padding: 0 10px; /* Трохи відступу від країв */
+    box-sizing: border-box;
 }
 
 .led-group {
@@ -178,8 +194,7 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 5px;
-    /* Можна додати мінімальну ширину, щоб клік по області був точнішим, якщо треба */
-    width: 30%; 
+    width: 25px; /* Фіксуємо ширину, щоб центр був рівний */
 }
 
 .led-label {
@@ -198,7 +213,6 @@ body {
     transition: all 0.2s;
 }
 
-/* Клас для увімкненої лампочки (додається через JS) */
 .led.active {
     background-color: var(--led-on);
     box-shadow: 0 0 6px var(--led-glow), 0 0 10px var(--led-glow);

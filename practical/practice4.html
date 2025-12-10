@@ -46,9 +46,16 @@
                 <div class="key">N</div><div class="key">M</div><div class="key">,</div><div class="key">.</div><div class="key">/</div>
                 <div class="key key-rshift">Shift</div>
 
-                <div class="key key-lctrl">Ctrl</div><div class="key">Win</div><div class="key">Alt</div>
-                <div class="key key-space"></div>
-                <div class="key">Alt</div><div class="key">Fn</div><div class="key">Ctx</div><div class="key key-rctrl">Ctrl</div>
+                <div class="row-bottom">
+                    <div class="key key-mod">Ctrl</div>
+                    <div class="key key-mod">Win</div>
+                    <div class="key key-mod">Alt</div>
+                    <div class="key key-space"></div>
+                    <div class="key key-mod">Alt</div>
+                    <div class="key key-mod">Fn</div>
+                    <div class="key key-mod">Ctx</div>
+                    <div class="key key-mod">Ctrl</div>
+                </div>
             </div>
         </div>
 
@@ -104,30 +111,20 @@
     </div>
 
     <script>
-        // Отримуємо елементи кнопок
         const btnNum = document.getElementById('btn-num');
         const btnCaps = document.getElementById('btn-caps');
         const btnScroll = document.getElementById('btn-scroll');
-
-        // Отримуємо елементи лампочок
         const ledNum = document.getElementById('led-num');
         const ledCaps = document.getElementById('led-caps');
         const ledScroll = document.getElementById('led-scroll');
 
-        // Функція перемикання (Toggle)
         function toggleLed(keyElement, ledElement) {
-            // Перемикаємо клас 'active' на лампочці
             ledElement.classList.toggle('active');
-            
-            // Можна також підсвічувати саму кнопку, якщо хочеш (необов'язково)
-            // keyElement.classList.toggle('key-active-state');
         }
 
-        // Вішаємо події кліку
         btnNum.addEventListener('click', () => toggleLed(btnNum, ledNum));
         btnCaps.addEventListener('click', () => toggleLed(btnCaps, ledCaps));
         btnScroll.addEventListener('click', () => toggleLed(btnScroll, ledScroll));
-
     </script>
 
 </body>
