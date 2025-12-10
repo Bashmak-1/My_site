@@ -1,23 +1,26 @@
 :root {
-    /* Кольори в стилі Hator (Dark Gaming) */
-    --case-bg: #111;         /* Колір корпусу */
-    --key-bg: #222;          /* Колір клавіші */
-    --key-border: #444;      /* Рамка клавіші */
-    --text-color: #eee;      /* Колір літер */
-    --accent-color: #ff3333; /* Акцент при наведенні */
+    /* Кольори в стилі Hator */
+    --case-bg: #111;
+    --key-bg: #222;
+    --key-border: #444;
+    --text-color: #eee;
+    --accent-color: #ff3333;
     
+    /* Колір лампочок (блакитний неон, як на фото Hator) */
+    --led-off: #333;
+    --led-on: #00eaff; 
+    --led-glow: rgba(0, 234, 255, 0.6);
+
     /* === РОЗМІРИ === */
-    --key-base: 50px;     /* Базовий розмір квадратної кнопки 1u */
-    --gap-size: 6px;      /* Відстань між кнопками */
-    
-    /* Відступи між великими секціями */
+    --key-base: 50px;
+    --gap-size: 6px;
     --section-gap: 20px;  
 }
 
 body {
-    background-color: #333; /* Фон самої сторінки */
+    background-color: #333;
     display: flex;
-    flex-direction: column; /* Вертикально: Клавіатура зверху, фото знизу */
+    flex-direction: column;
     align-items: center;
     min-height: 100vh;
     margin: 0;
@@ -25,20 +28,20 @@ body {
     padding: 50px 0;
 }
 
-/* === КОРПУС КЛАВІАТУРИ === */
+/* === КОРПУС === */
 .keyboard-case {
     background-color: var(--case-bg);
     border-radius: 15px;
     padding: 20px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    border-bottom: 8px solid #000; /* Ефект товщини корпусу */
-    
+    border-bottom: 8px solid #000;
     display: flex;
     gap: var(--section-gap);
-    /* Видаляємо background-image та фіксовані розміри, хай CSS сам рахує */
+    /* Забороняємо виділення тексту на всій клавіатурі */
+    user-select: none; 
 }
 
-/* === СТИЛЬ КНОПКИ === */
+/* === КНОПКИ === */
 .key {
     background-color: var(--key-bg);
     border: 1px solid var(--key-border);
@@ -50,18 +53,14 @@ body {
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
-    user-select: none;
-    box-shadow: 0 4px 0 #000; /* 3D ефект кнопки */
+    box-shadow: 0 4px 0 #000;
     transition: all 0.1s ease;
-    
-    /* Важливо: висота кнопки */
     height: var(--key-base);
 }
 
-/* Ефект натискання */
 .key:active {
-    transform: translateY(4px); /* Кнопка йде вниз */
-    box-shadow: 0 0 0 #000;     /* Тінь зникає */
+    transform: translateY(4px);
+    box-shadow: 0 0 0 #000;
     border-color: var(--accent-color);
     color: var(--accent-color);
 }
@@ -75,37 +74,32 @@ body {
     gap: var(--gap-size);
 }
 
-/* F-ряд */
 .section-f-keys {
     display: flex;
     gap: var(--gap-size);
-    margin-bottom: 25px; /* Відступ від F-ряда до цифр */
+    /* Цей відступ (margin-bottom) відокремлює F-ряд від цифр. 
+       Він має бути таким самим для сусідніх колонок! */
+    margin-bottom: 25px; 
 }
 
 .key-esc { width: var(--key-base); }
-.f-gap { width: var(--key-base); } /* Відступ між Esc і F1 (приблизно 1u) */
+.f-gap { width: var(--key-base); }
 
 .f-block {
     display: flex;
     gap: var(--gap-size);
-    margin-right: calc(var(--key-base) * 0.5); /* Пів кнопки відступу між блоками F */
+    margin-right: calc(var(--key-base) * 0.5);
 }
 .f-block .key { width: var(--key-base); }
 
-
-/* ОСНОВНИЙ БЛОК (СІТКА 60) */
 .section-main {
     display: grid;
-    /* 60 частин = 15 кнопок * 4 частини */
     grid-template-columns: repeat(60, 1fr); 
     grid-template-rows: repeat(5, var(--key-base));
     gap: var(--gap-size);
-    
-    /* Ширина основного блоку: 15 кнопок * 50px + відступи */
     width: calc((15 * var(--key-base)) + (14 * var(--gap-size)));
 }
 
-/* Grid spans (Тут все було вірно, залишаємо) */
 .section-main .key { grid-column: span 4; }
 .key-backspace { grid-column: span 8 !important; }
 .key-tab       { grid-column: span 6 !important; }
@@ -114,11 +108,8 @@ body {
 .key-enter     { grid-column: span 9 !important; }
 .key-lshift    { grid-column: span 9 !important; }
 .key-rshift    { grid-column: span 11 !important; }
-.key-lctrl    { grid-column: span 5 !important; }
-.key-rctrl    { grid-column: span 5 !important; }
-.key-win, .key-alt, .key-fn, .key-ctx { grid-column: span 5 !important; } /* Трохи змінив, щоб влізло рівно */
+.key-lctrl, .key-rctrl, .key-win, .key-alt, .key-fn, .key-ctx { grid-column: span 5 !important; }
 .key-space { grid-column: span 25 !important; }
-
 
 /* =========================================
    2. СЕРЕДНЯ КОЛОНКА
@@ -129,16 +120,22 @@ body {
     width: calc(3 * var(--key-base) + 2 * var(--gap-size));
 }
 
-.section-system {
+/* Верхній блок (Prt, Scr, Pau) - тепер вирівняний з F-клавішами */
+.section-sys-top {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, var(--key-base));
     gap: var(--gap-size);
-    margin-bottom: 42px; /* Підганяємо відступ, щоб стрілки були внизу */
+    /* Важливо: такий самий відступ вниз, як у section-f-keys */
+    margin-bottom: 25px; 
 }
-/* Опускаємо System блок нижче, щоб він був на рівні з Main блоком, а не з F-рядом */
-.section-system {
-    margin-top: calc(var(--key-base) + 25px + var(--gap-size)); 
+
+/* Основний блок навігації (Ins, Home, PgUp...) */
+.section-sys-main {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, var(--key-base));
+    gap: var(--gap-size);
+    /* Видаляємо старий margin-top, тепер все регулюється margin-bottom зверху */
 }
 
 .section-arrows {
@@ -146,13 +143,12 @@ body {
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, var(--key-base));
     gap: var(--gap-size);
-    margin-top: auto; /* Притискаємо до низу */
+    margin-top: auto; 
 }
 .empty { visibility: hidden; }
 
-
 /* =========================================
-   3. ПРАВА КОЛОНКА (Нампад)
+   3. ПРАВА КОЛОНКА (Нампад + LED)
    ========================================= */
 .column-right {
     display: flex;
@@ -160,12 +156,49 @@ body {
     width: calc(4 * var(--key-base) + 3 * var(--gap-size));
 }
 
-.numpad-gap {
-    /* Відступ зверху, щоб вирівняти нампад з основним блоком */
-    height: calc(var(--key-base) + 25px + var(--gap-size));
-    margin-bottom: 0;
+/* ПАНЕЛЬ ЛАМПОЧОК */
+.led-panel {
+    /* Висота розрахована так, щоб заповнити простір F-ряду + відступу */
+    height: calc(var(--key-base) + 25px); 
+    display: flex;
+    justify-content: flex-end; /* Лампочки зазвичай праворуч */
+    align-items: center;       /* Центруємо вертикально в цьому блоці */
+    gap: 15px;                 /* Відстань між групами лампочок */
+    padding-right: 5px;
+    margin-bottom: var(--gap-size);
 }
 
+.led-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.led-label {
+    font-size: 10px;
+    color: #888;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.led {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--led-off);
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.5);
+    transition: all 0.2s;
+}
+
+/* Клас для увімкненої лампочки (додається через JS) */
+.led.active {
+    background-color: var(--led-on);
+    box-shadow: 0 0 6px var(--led-glow), 0 0 10px var(--led-glow);
+}
+
+
+/* НАМПАД */
 .section-numpad {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -173,13 +206,13 @@ body {
     gap: var(--gap-size);
 }
 
-.key-plus { grid-row: span 2; height: auto; } /* auto щоб розтягнувся на 2 ряди + gap */
+.key-plus { grid-row: span 2; height: auto; }
 .key-enter-num { grid-row: span 2; height: auto; }
 .key-zero { grid-column: span 2; }
 
 
 /* =========================================
-   БЛОК ФОТО (РЕФЕРЕНС)
+   БЛОК ФОТО
    ========================================= */
 .reference-container {
     margin-top: 50px;

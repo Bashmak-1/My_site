@@ -14,7 +14,8 @@
             
             <div class="section-f-keys">
                 <div class="key key-esc">Esc</div>
-                <div class="f-gap"></div> <div class="f-block">
+                <div class="f-gap"></div> 
+                <div class="f-block">
                     <div class="key">F1</div><div class="key">F2</div><div class="key">F3</div><div class="key">F4</div>
                 </div>
                 <div class="f-block">
@@ -35,7 +36,7 @@
                 <div class="key">Y</div><div class="key">U</div><div class="key">I</div><div class="key">O</div><div class="key">P</div>
                 <div class="key">[</div><div class="key">]</div><div class="key key-slash">\</div>
 
-                <div class="key key-caps">Caps</div>
+                <div class="key key-caps" id="btn-caps">Caps</div>
                 <div class="key">A</div><div class="key">S</div><div class="key">D</div><div class="key">F</div><div class="key">G</div>
                 <div class="key">H</div><div class="key">J</div><div class="key">K</div><div class="key">L</div><div class="key">;</div>
                 <div class="key">'</div><div class="key key-enter">Enter</div>
@@ -52,8 +53,13 @@
         </div>
 
         <div class="column-middle">
-            <div class="section-system">
-                <div class="key">Prt</div><div class="key">Scr</div><div class="key">Pau</div>
+            <div class="section-sys-top">
+                <div class="key">Prt</div>
+                <div class="key key-scr" id="btn-scroll">Scr</div>
+                <div class="key">Pau</div>
+            </div>
+
+            <div class="section-sys-main">
                 <div class="key">Ins</div><div class="key">Hm</div><div class="key">PgU</div>
                 <div class="key">Del</div><div class="key">End</div><div class="key">PgD</div>
             </div>
@@ -65,10 +71,24 @@
         </div>
 
         <div class="column-right">
-             <div class="numpad-gap"></div> 
+             <div class="led-panel">
+                <div class="led-group">
+                    <div class="led-label">NUM</div>
+                    <div class="led" id="led-num"></div>
+                </div>
+                <div class="led-group">
+                    <div class="led-label">CAPS</div>
+                    <div class="led" id="led-caps"></div>
+                </div>
+                <div class="led-group">
+                    <div class="led-label">SCRL</div>
+                    <div class="led" id="led-scroll"></div>
+                </div>
+             </div>
              
              <div class="section-numpad">
-                <div class="key">Num</div><div class="key">/</div><div class="key">*</div><div class="key">-</div>
+                <div class="key key-num" id="btn-num">Num</div>
+                <div class="key">/</div><div class="key">*</div><div class="key">-</div>
                 <div class="key">7</div><div class="key">8</div><div class="key">9</div><div class="key key-plus">+</div>
                 <div class="key">4</div><div class="key">5</div><div class="key">6</div>
                 <div class="key">1</div><div class="key">2</div><div class="key">3</div><div class="key key-enter-num">Ent</div>
@@ -80,8 +100,35 @@
 
     <div class="reference-container">
         <h3>Оригінал (Референс):</h3>
-        <img src="../images/hator-icefall-mecha-origin-red-linear-htk104ua-black.jpg" alt="Keyboard Reference">
+        <img src="images/hator-icefall-mecha-origin-red-linear-htk104ua-black.jpg" alt="Keyboard Reference">
     </div>
+
+    <script>
+        // Отримуємо елементи кнопок
+        const btnNum = document.getElementById('btn-num');
+        const btnCaps = document.getElementById('btn-caps');
+        const btnScroll = document.getElementById('btn-scroll');
+
+        // Отримуємо елементи лампочок
+        const ledNum = document.getElementById('led-num');
+        const ledCaps = document.getElementById('led-caps');
+        const ledScroll = document.getElementById('led-scroll');
+
+        // Функція перемикання (Toggle)
+        function toggleLed(keyElement, ledElement) {
+            // Перемикаємо клас 'active' на лампочці
+            ledElement.classList.toggle('active');
+            
+            // Можна також підсвічувати саму кнопку, якщо хочеш (необов'язково)
+            // keyElement.classList.toggle('key-active-state');
+        }
+
+        // Вішаємо події кліку
+        btnNum.addEventListener('click', () => toggleLed(btnNum, ledNum));
+        btnCaps.addEventListener('click', () => toggleLed(btnCaps, ledCaps));
+        btnScroll.addEventListener('click', () => toggleLed(btnScroll, ledScroll));
+
+    </script>
 
 </body>
 </html>
