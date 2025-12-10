@@ -117,7 +117,7 @@
         const ledCaps = document.getElementById('led-caps');
         const ledScroll = document.getElementById('led-scroll');
 
-        // Функція для перемикання LED при кліку (стара логіка)
+        // Функція для кліку мишкою по кнопках на екрані
         function toggleLed(ledElement) {
             ledElement.classList.toggle('active');
         }
@@ -126,43 +126,34 @@
         btnCaps.addEventListener('click', () => toggleLed(ledCaps));
         btnScroll.addEventListener('click', () => toggleLed(ledScroll));
 
-        // === НОВА ЛОГІКА: СИНХРОНІЗАЦІЯ З РЕАЛЬНОЮ КЛАВІАТУРОЮ ===
+
+        // === ЛОГІКА СИНХРОНІЗАЦІЇ З КЛАВІАТУРОЮ ===
 
         document.addEventListener('keydown', function(event) {
-            // Шукаємо кнопку з відповідним кодом
             const code = event.code; 
             const keyElement = document.querySelector(`.key[data-code="${code}"]`);
 
+            // --- ВИПРАВЛЕННЯ ДЛЯ RIGHT ALT (AltGr) ---
+            // Якщо прийшов сигнал AltRight, значить перед ним мілісекунду тому був ControlLeft.
+            // Ми повинні знайти ControlLeft і вимкнути його, щоб він не світився.
+            if (code === 'AltRight') {
+                const leftCtrl = document.querySelector('.key[data-code="ControlLeft"]');
+                if (leftCtrl) leftCtrl.classList.remove('pressed');
+            }
+
             if (keyElement) {
-                // Додаємо клас натискання
+                // Блокуємо дії браузера для спецклавіш (щоб Alt не відкривав меню, а Tab не перемикав фокус)
+                // Але Win (Meta) блокувати не можна з міркувань безпеки ОС
+                if (code !== 'F5' && code !== 'F12' && code !== 'MetaLeft') {
+                    event.preventDefault();
+                }
+
                 keyElement.classList.add('pressed');
 
-                // Щоб кнопки типу Tab/Alt не виводили фокус з вікна, можна додати:
-                event.preventDefault();
-
-                // Синхронізація лампочок з реальними станами (CapsLock, NumLock)
-                // getModifierState повертає true, якщо CapsLock увімкнено
-                if (code === 'CapsLock') {
-                     if (event.getModifierState("CapsLock")) {
-                         ledCaps.classList.add('active');
-                     } else {
-                         ledCaps.classList.remove('active');
-                     }
-                }
-                if (code === 'NumLock') {
-                     if (event.getModifierState("NumLock")) {
-                         ledNum.classList.add('active');
-                     } else {
-                         ledNum.classList.remove('active');
-                     }
-                }
-                if (code === 'ScrollLock') {
-                     if (event.getModifierState("ScrollLock")) {
-                         ledScroll.classList.add('active');
-                     } else {
-                         ledScroll.classList.remove('active');
-                     }
-                }
+                // Синхронізація лампочок (Caps, Num, Scroll)
+                if (code === 'CapsLock') toggleLockState(ledCaps, event.getModifierState("CapsLock"));
+                if (code === 'NumLock') toggleLockState(ledNum, event.getModifierState("NumLock"));
+                if (code === 'ScrollLock') toggleLockState(ledScroll, event.getModifierState("ScrollLock"));
             }
         });
 
@@ -171,18 +162,34 @@
             const keyElement = document.querySelector(`.key[data-code="${code}"]`);
 
             if (keyElement) {
-                // Прибираємо клас натискання
                 keyElement.classList.remove('pressed');
             }
-        });
-        
-        // Ініціалізація стану лампочок при завантаженні (щоб збігалося з реальним станом)
-        document.addEventListener('DOMContentLoaded', () => {
-             // На жаль, браузери не дають перевірити стан CapsLock без натискання клавіші
-             // тому це спрацює лише після першого натискання будь-якої кнопки
+
+            // Додаткова підстраховка для AltGr:
+            // Коли відпускаємо AltRight, переконаємось, що ControlLeft теж не залип
+            if (code === 'AltRight') {
+                const leftCtrl = document.querySelector('.key[data-code="ControlLeft"]');
+                if (leftCtrl) leftCtrl.classList.remove('pressed');
+            }
         });
 
+        // --- ВИПРАВЛЕННЯ "ЗАЛИПАННЯ" ПРИ ВТРАТІ ФОКУСУ ---
+        // Якщо натиснути Win (відкриється меню Пуск) або Alt+Tab, браузер "забуває" віджати кнопку.
+        // Ця подія спрацьовує, коли вікно втрачає активність, і скидає всі натиснуті кнопки.
+        window.addEventListener('blur', function() {
+            document.querySelectorAll('.key.pressed').forEach(key => {
+                key.classList.remove('pressed');
+            });
+        });
+
+        // Допоміжна функція для лампочок
+        function toggleLockState(ledElement, isActive) {
+            if (isActive) {
+                ledElement.classList.add('active');
+            } else {
+                ledElement.classList.remove('active');
+            }
+        }
     </script>
-
 </body>
 </html>
