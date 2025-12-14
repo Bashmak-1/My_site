@@ -112,6 +112,49 @@ body {
     position: relative;
 }
 
+/* --- ТРИКУТНИКИ (DECORATION) --- */
+
+/* 1. Трикутник для сайдбару (TO DO - правий верхній кут) */
+.sidebar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-top: 6px solid #808080;
+    border-left: 6px solid transparent;
+    z-index: 5;
+}
+
+/* 2. Базовий стиль для днів (Вівторок, Середа, П'ятниця, Субота) - по центру лінії */
+.day-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -6px;
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid #808080;
+    z-index: 5;
+}
+
+/* 3. Понеділок та Четвер (Ліва сторона днів) - лівий верхній кут */
+.day-box.monday::before,
+.day-box.thursday::before {
+    left: 0; 
+    border-left: 0; 
+    border-right: 6px solid transparent;
+    border-top: 6px solid #808080;
+}
+
+/* 4. Неділя - без трикутника */
+.day-box.sunday::before {
+    display: none;
+}
+
 /* Видаляємо правий бордер у останнього елемента в рядку */
 .weekend-column, .wednesday {
     border-right: none;
