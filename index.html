@@ -4,93 +4,153 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Особистий веб сайт Барабаша Володимира ТЦР-21</title>
+  <title>Портфоліо Барабаша Володимира ТЦР-21</title>
+  
   <link rel="stylesheet" href="css/style.css" />
+  
+  <link id="theme-style" rel="stylesheet" href="" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
   <header>
-    <!-- По приколу добавив фотку кота))) -->
-    <img src="images/meme_cat.jpg" alt="Meme Cat" style="
-          width: 100%;
-          max-height: 300px;
-          object-fit: cover;
-          display: block;
-        " />
-    <h1 style="margin-block-start: 5px">
-      Особистий веб сайт Барабаша Володимира
-    </h1>
-    <nav>
-      <ul>
-        <li><a href="index.html">Головна</a></li>
-        <li><a href="#about">Про мене</a></li>
-        <li><a href="practicals.html">Практичні роботи</a></li>
-        <li><a href="labs.html">Лабораторки</a></li>
-      </ul>
-    </nav>
+    <div class="container header-container">
+      <div class="logo">Барабаш Володимир</div>
+      <nav>
+        <ul>
+          <li><a href="index.html" class="active">Головна</a></li>
+          <li><a href="#about">Про мене</a></li>
+          <li><a href="labs.html">Лабораторні</a></li>
+          <li><a href="practicals.html">Практичні</a></li>
+        </ul>
+      </nav>
+      <button id="theme-toggle" class="theme-btn">🌙 Dark Mode</button>
+    </div>
   </header>
 
-  <main>
-    <section id="about">
-      <h2>Про мене</h2>
+  <main class="container">
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Hi, I am Volodymyr,<br>Creative Technologist</h1>
+        <p>Студент групи ТЦР-21. На цьому сайті зібрані всі лабораторні та практичні роботи.</p>
+        <a href="#" class="btn-primary">Download Resume</a>
+      </div>
+      <div class="hero-image">
+        <img src="images/photo_mordy_XD.jpg" alt="Photo_mordy_XD" class="profile-img" />
+      </div>
+    </section>
 
-      <!-- flip картка -->
-      <div class="flip-container">
-        <div class="flip-card">
-          <div class="flip-front">
-            <img src="images/photo_mordy_XD.jpg" alt="Фото студента" />
+    <section class="labs-section">
+      <div class="section-header">
+        <h2>Лабораторні роботи</h2>
+        <a href="labs.html" class="view-all">Переглянути всі</a>
+      </div>
+      
+      <div class="cards-grid">
+        <div class="card">
+          <h3>Лабораторна робота №1</h3>
+          <p>Основи HTML. Створення першої сторінки.</p>
+          <span class="date">Вересень 2024</span>
+          <a href="lab/lab1.html" class="card-link"></a>
+        </div>
+        <div class="card">
+          <h3>Лабораторна робота №2</h3>
+          <p>Структура документа та теги форматування.</p>
+          <span class="date">Вересень 2024</span>
+          <a href="lab/lab2.html" class="card-link"></a>
+        </div>
+        <div class="card">
+          <h3>Лабораторна робота №3</h3>
+          <p>Використання CSS для стилізації.</p>
+          <span class="date">Жовтень 2024</span>
+          <a href="lab/lab3.html" class="card-link"></a>
+        </div>
+        <div class="card">
+          <h3>Лабораторна робота №4</h3>
+          <p>Створення сторінки планера.</p>
+          <span class="date">Листопад 2024</span>
+          <a href="lab/lab4.html" class="card-link"></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="practical-section">
+      <h2>Практичні роботи</h2>
+      
+      <div class="practical-list">
+        <div class="practical-card">
+          <div class="practical-img"><img src="images/meme_cat.jpg" alt="Preview"></div>
+          <div class="practical-info">
+            <h3><a href="practical/practice1.html">Практична робота №1</a></h3>
+            <span class="tag html">HTML</span>
+            <p>Основи створення вебсторінки.</p>
           </div>
-          <div class="flip-back">
-            <img src="images/psycho-cat.png" alt="Психуючий кіт" class="angry-cat" />
+        </div>
+
+        <div class="practical-card">
+          <div class="practical-img"><img src="images/meme_cat.jpg" alt="Preview"></div>
+          <div class="practical-info">
+            <h3><a href="practical/practice2.html">Практична робота №2</a></h3>
+            <span class="tag css">CSS</span>
+            <p>Основи CSS. Селектори та властивості.</p>
+          </div>
+        </div>
+
+        <div class="practical-card">
+          <div class="practical-img"><img src="images/meme_cat.jpg" alt="Preview"></div>
+          <div class="practical-info">
+            <h3><a href="practical/practice3.html">Практична робота №3</a></h3>
+            <span class="tag css">CSS</span>
+            <p>Клон YouTube (Flexbox).</p>
+          </div>
+        </div>
+
+        <div class="practical-card">
+          <div class="practical-img"><img src="images/meme_cat.jpg" alt="Preview"></div>
+          <div class="practical-info">
+            <h3><a href="practical/practice4.html">Практична робота №4</a></h3>
+            <span class="tag css">CSS</span>
+            <p>Повнорозмірна клавіатура (Grid layout).</p>
           </div>
         </div>
       </div>
-
-      <p>
-        Мене звати Барабаш Володимир. Я студент другого курсу факультету
-        інформатики, група ТЦР-21. В мої інтереси включають програмування,
-        читання манг та вчудити щось.
-      </p>
-      <p>Email: vovan.barabash.05@gmail.com</p>
-    </section>
-
-    <section>
-      <h2>Практичні роботи</h2>
-      <ul>
-        <li>
-          <a href="practical/practice1.html">Практична робота №1 - Основи HTML</a>
-        </li>
-        <li>
-          <a href="practical/practice2.html">Практична робота №2 - Основи CSS</a>
-        </li>
-        <li>
-          <a href="practical/practice3.html">Практична робота №3 - Клон YouTube</a>
-        </li>
-        <li>
-          <a href="practical/practice4.html">Практична робота №4 - Повнорозмірна клавіатура (grid)</a>
-        </li>
-        <!-- Інші практичні -->
-      </ul>
-    </section>
-
-    <section>
-      <h2>Лабораторки</h2>
-      <ul>
-        <li><a href="lab/lab1.html">Лабораторна робота №1 - Основи HTML</a></li>
-        <li><a href="lab/lab2.html">Лабораторна робота №2</a></li>
-        <li><a href="lab/lab3.html">Лабораторна робота №3</a></li>
-        <li><a href="lab/lab4.html">Лабораторна робота №4 - Сторінка планер</a></li>
-        <!-- Інші лабораторні -->
-      </ul>
     </section>
   </main>
 
   <footer>
-    <p>
-      © 2025 Барабаш Володимир |
-      <a href="https://github.com/Bashmak-1">GitHub</a> | Навчання в ДУІКТ
-    </p>
+    <p>© 2025 Барабаш Володимир | <a href="https://github.com/Bashmak-1">GitHub</a></p>
   </footer>
-</body>
 
+  <script>
+    // Знаходимо елементи
+    const toggleBtn = document.getElementById('theme-toggle');
+    const themeLink = document.getElementById('theme-style');
+    
+    // Шлях до темного CSS
+    const darkThemePath = 'css/black_style.css';
+
+    // 1. Перевірка при завантаженні сторінки (чи є збережений вибір)
+    // Ми використовуємо localStorage, це краще ніж cookies для таких налаштувань
+    if (localStorage.getItem('theme') === 'dark') {
+      themeLink.href = darkThemePath;
+      toggleBtn.innerText = '☀️ Light Mode';
+    }
+
+    // 2. Логіка при кліку на кнопку
+    toggleBtn.addEventListener('click', () => {
+      // Якщо зараз посилання пусте або не веде на темну тему -> Включаємо темну
+      if (themeLink.getAttribute('href') !== darkThemePath) {
+        themeLink.href = darkThemePath;
+        toggleBtn.innerText = '☀️ Light Mode';
+        localStorage.setItem('theme', 'dark'); // Зберігаємо вибір
+      } else {
+        // Виключаємо темну тему
+        themeLink.href = '';
+        toggleBtn.innerText = '🌙 Dark Mode';
+        localStorage.setItem('theme', 'light'); // Зберігаємо вибір
+      }
+    });
+  </script>
+</body>
 </html>

@@ -1,0 +1,73 @@
+/* --- DARK MODE OVERRIDES (black_style.css) --- */
+
+/* Фон сторінки */
+body {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+/* Header */
+header {
+  background-color: #1e1e1e;
+  box-shadow: 0 2px 5px rgba(255, 255, 255, 0.05);
+}
+
+.logo {
+  color: #ffffff;
+}
+
+nav ul li a {
+  color: #b0b0b0;
+}
+
+nav ul li a:hover, nav ul li a.active {
+  color: #ffffff;
+}
+
+/* Hero Section */
+.hero {
+  background-color: #1e1e1e;
+}
+
+.hero-content h1 {
+  color: #ffffff;
+}
+
+/* Кнопка (можна змінити колір, щоб виділялась) */
+.btn-primary {
+  background-color: #ff4747;
+}
+
+/* Cards (Лабораторні та Практичні) */
+.card, .practical-card {
+  background-color: #1e1e1e;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.card h3, .practical-info h3 a {
+  color: #ffffff;
+}
+
+.card .date {
+  color: #888;
+}
+
+/* Footer */
+footer {
+  color: #888;
+}
+
+footer a {
+  color: #fff;
+}
+
+/* Сама кнопка перемикання теми */
+.theme-btn {
+  background-color: #333;
+  color: #fff;
+  border: 1px solid #555;
+}
+
+.theme-btn:hover {
+  background-color: #444;
+}

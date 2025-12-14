@@ -1,99 +1,259 @@
-/* Темна тема */
+/* --- СТИЛІ ДЛЯ ЛАБОРАТОРНОЇ РОБОТИ №5 (Світла тема / Portfolio UI) --- */
+
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Inter', Arial, sans-serif;
   line-height: 1.6;
   margin: 0;
   padding: 0;
-  background-color: #121212;
-  color: #ffffff;
+  background-color: #F3F4F6; /* Світло-сірий фон, як на макеті */
+  color: #333333;
 }
 
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Header */
 header {
-  background-color: #1e1e1e;
-  color: #ffffff;
+  background-color: #fff;
   padding: 20px 0;
-  text-align: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: #111;
 }
 
 nav ul {
-  padding: 0;
-  margin: 0;
   list-style: none;
   display: flex;
-  justify-content: center;
-  background-color: #2a2a2a;
+  margin: 0;
+  padding: 0;
 }
 
 nav ul li {
-  margin: 0 15px;
+  margin-left: 30px;
 }
 
 nav ul li a {
-  color: #ffffff;
   text-decoration: none;
-  padding: 10px;
+  color: #666;
+  font-weight: 500;
+  transition: color 0.3s;
 }
 
-nav ul li a:hover {
-  background-color: #3a3a3a;
-  border-radius: 5px;
+nav ul li a:hover, nav ul li a.active {
+  color: #111;
 }
 
-main {
-  padding: 20px;
-  background-color: #181818;
-}
-
-section {
+/* Hero Section */
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 60px 40px;
+  background-color: #fff;
   margin-bottom: 30px;
+  border-radius: 0 0 20px 20px; /* Закруглення знизу, якщо треба */
 }
 
-footer {
-  background-color: #1e1e1e;
-  color: #bbbbbb;
-  text-align: center;
-  padding: 15px 0;
-  margin-top: 30px;
+.hero-content {
+  max-width: 50%;
 }
 
-img {
-  border-radius: 10px;
-  margin: 10px 0;
+.hero-content h1 {
+  font-size: 2.5rem;
+  line-height: 1.2;
+  margin-bottom: 20px;
+  color: #111;
 }
 
-/* Таблиця */
-table {
-  width: 100%;
-  border-collapse: collapse;
-  background-color: #1f1f1f;
+.btn-primary {
+  display: inline-block;
+  background-color: #FF6464; /* Червоний колір з макету */
   color: #fff;
+  padding: 10px 25px;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  margin-top: 20px;
+  transition: background 0.3s;
 }
 
-table,
-th,
-td {
-  border: 1px solid #444;
+.btn-primary:hover {
+  background-color: #e55a5a;
 }
 
-th,
-td {
-  padding: 10px;
+.hero-image {
+  position: relative;
+}
+
+/* Кругла фотка (profile image) */
+.profile-img {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  object-fit: cover; /* Обрізає зайве, зберігаючи пропорції */
+  
+  /* --- ДОДАЙ ЦЕЙ РЯДОК --- */
+  /* Перше значення (center) - по горизонталі */
+  /* Друге значення (20%) - по вертикалі (зміщує фокус вище) */
+  object-position: center 20%; 
+  
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+/* Sections General */
+section {
+  margin-bottom: 50px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.view-all {
+  color: #FF6464;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+/* Cards Grid (Лабораторні) */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  position: relative; /* Для посилання на всю картку */
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card h3 {
+  margin-top: 0;
+  font-size: 1.2rem;
+}
+
+.card .date {
+  display: block;
+  font-size: 0.85rem;
+  color: #999;
+  margin-top: 15px;
+}
+
+/* Робить всю картку клікабельною */
+.card-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Practical List (Практичні) */
+.practical-card {
+  display: flex;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.practical-img {
+  width: 200px;
+  min-width: 200px;
+}
+
+.practical-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.practical-info {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.practical-info h3 {
+  margin: 0 0 10px 0;
+}
+
+.practical-info h3 a {
+  text-decoration: none;
+  color: #111;
+}
+
+.tag {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  color: #fff;
+  font-weight: bold;
+  width: fit-content;
+  margin-bottom: 10px;
+}
+
+.tag.html { background-color: #142850; }
+.tag.css { background-color: #FF6464; }
+
+/* Footer */
+footer {
   text-align: center;
+  padding: 30px 0;
+  color: #666;
+  background-color: transparent;
 }
 
-th {
-  background-color: #333;
+footer a {
+  color: #333;
 }
 
-/* Прикол з головним зображенням мене */
+/* ============================================================ */
+/* ЗБЕРЕЖЕНИЙ СТАРИЙ КОД (ТЕМНА ТЕМА ТА FLIP-КАРТКИ)            */
+/* Розкоментуй це, якщо захочеш повернути старий дизайн         */
+/* ============================================================ */
 
+/* body.dark-mode {
+  background-color: #121212;
+  color: #ffffff;
+}
+... (сюди я переніс би твій старий код, якщо треба зберегти його в тому ж файлі)
+*/
+
+/* Код для Flip-анімації кота (збережено на прохання) */
 .flip-container {
   perspective: 1000px;
   width: 200px;
   height: 270px;
-  margin-bottom: 15px; /* щоб був відступ від тексту */
 }
-
 .flip-card {
   width: 100%;
   height: 100%;
@@ -101,57 +261,52 @@ th {
   transform-style: preserve-3d;
   position: relative;
 }
-
 .flip-container:hover .flip-card {
   transform: rotateY(180deg);
 }
-
-.flip-front,
-.flip-back {
+.flip-front, .flip-back {
   position: absolute;
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
 }
-
-.flip-front img,
-.flip-back img {
+.flip-front img, .flip-back img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   border-radius: 15px;
 }
-
 .flip-back {
   transform: rotateY(180deg);
   display: flex;
   align-items: center;
   justify-content: center;
 }
-
-.flip-back img {
-  transform: rotateY(180deg); /* щоб не було дзеркально */
-}
-
 /* Ефект тряски кота */
 .flip-container:hover .angry-cat {
   animation: shake 0.5s infinite;
 }
-
 @keyframes shake {
-  0% {
-    transform: translate(0, 0) rotate(0deg);
-  }
-  25% {
-    transform: translate(5px, 0) rotate(2deg);
-  }
-  50% {
-    transform: translate(-5px, 0) rotate(-2deg);
-  }
-  75% {
-    transform: translate(5px, 0) rotate(1deg);
-  }
-  100% {
-    transform: translate(0, 0) rotate(0deg);
-  }
+  0% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(5px, 0) rotate(2deg); }
+  50% { transform: translate(-5px, 0) rotate(-2deg); }
+  75% { transform: translate(5px, 0) rotate(1deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+/* Стиль для кнопки перемикання теми */
+.theme-btn {
+  margin-left: 20px;
+  padding: 8px 16px;
+  border: 1px solid #ccc;
+  background-color: #f0f0f0;
+  cursor: pointer;
+  border-radius: 20px;
+  font-family: inherit;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.theme-btn:hover {
+  background-color: #e0e0e0;
 }
