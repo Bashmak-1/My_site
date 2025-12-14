@@ -382,3 +382,123 @@ footer a {
   75% { transform: translate(5px, -5px) rotate(5deg) scale(1.1); }
   100% { transform: translate(0, 0) rotate(0deg) scale(1.1); }
 }
+
+
+/* ========================================= */
+/* АДАПТИВНІСТЬ (MOBILE STYLES) - LAB 8      */
+/* ========================================= */
+
+/* Стилі для гамбургер-меню (за замовчуванням приховано) */
+.burger-menu {
+  display: none;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.burger-menu span {
+  width: 25px;
+  height: 3px;
+  background-color: #333;
+  transition: all 0.3s;
+}
+
+/* --- MOBILE QUERY --- */
+@media (max-width: 768px) {
+
+  /* 1. HEADER & MENU */
+  .burger-menu {
+    display: flex; /* Показуємо кнопку меню */
+    z-index: 1001; /* Щоб була поверх всього */
+  }
+
+  /* Ховаємо звичайне меню і робимо його випадаючим */
+  nav ul {
+    display: none; /* Ховаємо список */
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+    padding: 20px 0;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    
+    /* Абсолютне позиціонування під хедером */
+    position: absolute;
+    top: 70px; /* Висота хедера */
+    left: 0;
+    z-index: 1000;
+  }
+
+  nav ul li {
+    margin: 15px 0; /* Відступи між пунктами */
+  }
+
+  /* Клас active додається JS-ом, коли меню відкрите */
+  nav.active ul {
+    display: flex;
+  }
+  
+  /* Анімація перетворення гамбургера в хрестик (опціонально) */
+  .burger-menu.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 6px);
+  }
+  .burger-menu.active span:nth-child(2) {
+    opacity: 0;
+  }
+  .burger-menu.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -6px);
+  }
+
+  /* Сховати кнопку теми на мобільному, якщо заважає, 
+     або зменшити відступи */
+  .theme-btn {
+    display: none; /* Тимчасово приховаємо для чистоти дизайну як в Figma */
+  }
+
+  /* 2. HERO SECTION (Головний блок) */
+  .hero {
+    flex-direction: column-reverse; /* Фото зверху, текст знизу (перевертаємо порядок flex) */
+    text-align: center; /* Центруємо текст */
+    padding: 40px 20px;
+    border-radius: 0;
+  }
+
+  .hero-content {
+    max-width: 100%;
+    margin-top: 30px; /* Відступ тексту від фото */
+  }
+
+  .hero-content h1 {
+    font-size: 2rem; /* Трохи менший шрифт */
+  }
+
+  .hero-image {
+    margin: 0 auto; /* Центруємо контейнер з котом */
+    width: 200px;   /* Трохи зменшуємо фото для мобільного */
+    height: 200px;
+  }
+  
+  /* Оскільки ми змінили розмір контейнера, треба оновити й вкладені елементи */
+  .flip-container, .flip-card, .profile-img {
+    width: 200px;
+    height: 200px;
+  }
+
+  /* 3. GRIDS & LISTS (Картки в одну колонку) */
+  .cards-grid {
+    grid-template-columns: 1fr; /* Одна колонка на всю ширину */
+  }
+
+  .practical-card {
+    flex-direction: column; /* Картинка зверху, текст знизу */
+  }
+
+  .practical-img {
+    width: 100%; /* Картинка на всю ширину */
+    height: 200px;
+  }
+  
+  .practical-info {
+    padding: 20px;
+  }
+}
