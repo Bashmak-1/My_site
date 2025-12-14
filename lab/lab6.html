@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokemon Evolution Lab</title>
+    <style>
+        /* --- ЗАГАЛЬНІ НАЛАШТУВАННЯ ТА ФОН --- */
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e); /* Темний нічний фон */
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Анімація фону: зірки або туман */
+        .background-effect {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 200%;
+            height: 100%;
+            background-image: url('https://www.transparenttextures.com/patterns/stardust.png'); /* Паттерн зірок */
+            opacity: 0.5;
+            animation: moveStars 100s linear infinite;
+            z-index: 0;
+        }
+
+        /* Сцена (земля/платформа) */
+        .stage {
+            position: relative;
+            width: 800px;
+            height: 400px;
+            z-index: 1;
+        }
+
+        .ground {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 50px;
+            background: linear-gradient(to right, #2c3e50, #4ca1af);
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+
+        /* --- ГЕРОЇ ТА ОБ'ЄКТИ --- */
+        
+        /* Контейнер для покемона (центр сцени) */
+        .pokemon-container {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 150px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+        }
+
+        /* Власне зображення покемона */
+        .pokemon {
+            width: 100%;
+            height: 100%;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: bottom center;
+            
+            /* ГОЛОВНА АНІМАЦІЯ ЦИКЛУ (30 секунд) */
+            animation: evolutionCycle 30s linear infinite;
+        }
+
+        /* Покебол */
+        .pokeball-wrapper {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            width: 40px;
+            height: 40px;
+            /* Анімація польоту покеболу (0-3 сек) */
+            animation: throwPokeball 30s linear infinite;
+            opacity: 0; /* Спочатку невидимий */
+        }
+        
+        .pokeball-img {
+            width: 100%;
+            height: 100%;
+            background: red; /* ЗАМІНИТИ НА URL картинки покеболу */
+            border-radius: 50%;
+            border: 2px solid white;
+            box-sizing: border-box;
+            background-image: linear-gradient(to bottom, red 50%, white 50%); /* Схематичний покебол */
+            animation: spinBall 1s linear infinite;
+        }
+
+        /* Їжа (Цукерка) */
+        .food-wrapper {
+            position: absolute;
+            bottom: 80px;
+            left: 50%;
+            width: 30px;
+            height: 30px;
+            opacity: 0;
+            /* Анімація кидка їжі (використовується двічі за цикл, але для простоти зробимо одну складну) */
+            animation: throwFoodSequence 30s linear infinite;
+        }
+
+        .food-img {
+            width: 100%;
+            height: 100%;
+            background: orange; /* ЗАМІНИТИ НА URL їжі */
+            border-radius: 5px;
+        }
+
+        /* Ефект вибуху/появи (Anime style) */
+        .flash-effect {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10px;
+            height: 10px;
+            background: white;
+            border-radius: 50%;
+            opacity: 0;
+            box-shadow: 0 0 20px white, 0 0 40px cyan;
+            animation: flashSequence 30s linear infinite;
+            pointer-events: none;
+        }
+
+        /* --- KEYFRAMES (СЦЕНАРІЙ) --- */
+
+        /* 1. СЦЕНАРІЙ ПОКЕМОНА (Зміна картинок і еволюція) 
+           Таймінг (з розрахунку 30 сек цикл):
+           0-3s: Пусто (летить покебол)
+           3s: Поява (Litten)
+           3-10s: Litten стоїть
+           10-12s: Еволюція 1 (спалах) -> Torracat
+           12-20s: Torracat стоїть
+           20-22s: Еволюція 2 (спалах) -> Incineroar
+           22-28s: Incineroar стоїть
+           28-30s: Зникає, рестарт
+        */
+        @keyframes evolutionCycle {
+            0%, 9% { 
+                opacity: 0; 
+                transform: scale(0);
+            }
+            10% { 
+                opacity: 1; 
+                transform: scale(1);
+                background-image: url('https://img.pokemondb.net/sprites/scarlet-violet/normal/litten.png'); /* Litten */
+                filter: brightness(1);
+            }
+            30% {
+                background-image: url('https://img.pokemondb.net/sprites/scarlet-violet/normal/litten.png');
+                filter: brightness(1);
+            }
+            33% {
+                filter: brightness(10); /* Спалах еволюції */
+                transform: scale(1.2);
+            }
+            36% {
+                background-image: url('https://img.pokemondb.net/sprites/scarlet-violet/normal/torracat.png'); /* Torracat */
+                filter: brightness(1);
+                transform: scale(1);
+            }
+            60% {
+                background-image: url('https://img.pokemondb.net/sprites/scarlet-violet/normal/torracat.png');
+                filter: brightness(1);
+            }
+            63% {
+                filter: brightness(10); /* Спалах еволюції */
+                transform: scale(1.3);
+            }
+            66% {
+                background-image: url('https://img.pokemondb.net/sprites/scarlet-violet/normal/incineroar.png'); /* Incineroar */
+                filter: brightness(1);
+                transform: scale(1);
+            }
+            90% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            95%, 100% {
+                opacity: 0; /* Зникає перед новим циклом */
+                transform: scale(0);
+            }
+        }
+
+        /* 2. ПОКЕБОЛ (Траєкторія ядра) */
+        @keyframes throwPokeball {
+            0% {
+                opacity: 1;
+                transform: translate(400px, -300px); /* Початок: верхній правий кут */
+            }
+            8% {
+                opacity: 1;
+                transform: translate(0, 0); /* Приземлення в центр */
+            }
+            9% {
+                opacity: 1;
+                transform: scale(1.5); /* Відкривається */
+            }
+            10% {
+                opacity: 0; /* Зникає, бо виходить покемон */
+                transform: scale(0);
+            }
+            100% { opacity: 0; }
+        }
+
+        @keyframes spinBall {
+            100% { transform: rotate(360deg); }
+        }
+
+        /* 3. ЇЖА (Кидки для еволюції) 
+           Кидок 1: ~30% (перед першою еволюцією)
+           Кидок 2: ~60% (перед другою еволюцією)
+        */
+        @keyframes throwFoodSequence {
+            0%, 25% { opacity: 0; transform: translate(400px, -200px); }
+            /* Перший кидок */
+            28% { opacity: 1; transform: translate(400px, -200px); }
+            32% { opacity: 1; transform: translate(0, 20px); } /* Попадання в покемона */
+            33% { opacity: 0; }
+            
+            /* Другий кидок */
+            55% { opacity: 0; transform: translate(400px, -200px); }
+            58% { opacity: 1; transform: translate(400px, -200px); }
+            62% { opacity: 1; transform: translate(0, 20px); }
+            63% { opacity: 0; }
+            100% { opacity: 0; }
+        }
+
+        /* 4. СПАЛАХИ (Anime effect) */
+        @keyframes flashSequence {
+            0%, 9% { opacity: 0; transform: translateX(-50%) scale(0); }
+            10% { opacity: 1; transform: translateX(-50%) scale(20); } /* Поява покемона */
+            11% { opacity: 0; }
+            
+            33% { opacity: 0.8; transform: translateX(-50%) scale(15); box-shadow: 0 0 50px yellow; } /* Евол 1 */
+            34% { opacity: 0; }
+
+            63% { opacity: 0.8; transform: translateX(-50%) scale(20); box-shadow: 0 0 50px red; } /* Евол 2 */
+            64% { opacity: 0; }
+            100% { opacity: 0; }
+        }
+
+        /* Рух зірок на фоні */
+        @keyframes moveStars {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="background-effect"></div>
+
+    <div class="stage">
+        <div class="pokemon-container">
+            <div class="pokemon"></div>
+        </div>
+
+        <div class="pokeball-wrapper">
+            <div class="pokeball-img"></div>
+        </div>
+
+        <div class="food-wrapper">
+            <div class="food-img"></div>
+        </div>
+
+        <div class="flash-effect"></div>
+
+        <div class="ground"></div>
+    </div>
+
+</body>
+</html>
