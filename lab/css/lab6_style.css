@@ -47,8 +47,8 @@ body {
 /* Контейнер для покемона */
 .pokemon-container {
     position: absolute;
-    /* ЗМІНА 1: Опустили на рівень 60px (було 80px) */
-    bottom: 60px; 
+    /* ВИПРАВЛЕННЯ: Підняли на 5px (було 60px -> 65px) */
+    bottom: 65px; 
     left: 50%;
     transform: translateX(-50%);
     width: 150px;
@@ -66,7 +66,7 @@ body {
     background-repeat: no-repeat;
     background-position: bottom center;
     
-    /* ЗМІНА 2: Точка росту — низ центр. Тепер він росте ВГОРУ */
+    /* Росте вгору від ніг */
     transform-origin: bottom center;
     
     animation: evolutionCycle 30s linear infinite;
@@ -75,8 +75,8 @@ body {
 /* Покебол */
 .pokeball-wrapper {
     position: absolute;
-    /* ЗМІНА 1: Синхронізували з покемоном (60px) */
-    bottom: 60px;
+    /* Синхронізували (65px) */
+    bottom: 65px;
     left: 50%;
     width: 40px;
     height: 40px;
@@ -88,7 +88,6 @@ body {
 .pokeball-img {
     width: 100%;
     height: 100%;
-    /* Тут можеш вставити URL покеболу, якщо знайдеш */
     background: red; 
     border-radius: 50%;
     border: 2px solid white;
@@ -100,8 +99,8 @@ body {
 /* Їжа */
 .food-wrapper {
     position: absolute;
-    /* ЗМІНА 1: Опустили трохи нижче (було 110px -> 90px), щоб відповідало пропорціям */
-    bottom: 90px;
+    /* Також підняли на 5px (було 90px -> 95px) */
+    bottom: 95px;
     left: 50%;
     width: 30px;
     height: 30px;
@@ -113,21 +112,20 @@ body {
 .food-img {
     width: 100%;
     height: 100%;
-    /* ЗМІНА 3: Додали Rare Candy */
-    background-image: url('https://static.wikia.nocookie.net/pokemon/images/5/53/Rare_Candy_Artwork.png/revision/latest/scale-to-width/360?cb=20201024131645&path-prefix=ru');
+    /* ВИПРАВЛЕННЯ: Нове надійне посилання на Rare Candy (PokeAPI) */
+    background-image: url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/rare-candy.png');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    /* Прибрали background-color: orange */
 }
 
 /* Ефект вибуху */
 .flash-effect {
     position: absolute;
-    /* ЗМІНА 1: Синхронізували центр вибуху (60px) */
-    bottom: 60px;
+    /* Синхронізували (65px) */
+    bottom: 65px;
     left: 50%;
-    transform: translateX(-50%); /* Тут origin не чіпаємо, вибух має йти з центру */
+    transform: translateX(-50%);
     width: 10px;
     height: 10px;
     background: white;
@@ -186,7 +184,7 @@ body {
 
 @keyframes throwPokeball {
     0% { opacity: 1; transform: translate(400px, -300px); }
-    8% { opacity: 1; transform: translate(0, 0); } /* Приземляється в центр ніг */
+    8% { opacity: 1; transform: translate(0, 0); }
     9% { opacity: 1; transform: scale(1.5); }
     10% { opacity: 0; transform: scale(0); }
     100% { opacity: 0; }
@@ -201,7 +199,7 @@ body {
     
     /* Кидок 1 */
     33% { opacity: 1; transform: translate(400px, -200px); }
-    37% { opacity: 1; transform: translate(0, 30px); } /* Трохи змінили точку прильоту */
+    37% { opacity: 1; transform: translate(0, 30px); } 
     38% { opacity: 0; }
 
     /* Кидок 2 */
