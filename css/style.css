@@ -22,10 +22,41 @@ header {
   box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 
+/* Оновлений контейнер хедера */
 .header-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative; /* Важливо для позиціонування мобільного меню */
+}
+
+/* Група кнопок справа */
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Відстань між місяцем і гамбургером */
+}
+
+/* Кнопка теми - кругла і без тексту */
+.theme-btn {
+  background: transparent;
+  border: 2px solid #ddd;
+  border-radius: 50%; /* Робимо круглою */
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+  padding: 0;
+  margin: 0; /* Прибираємо старі відступи */
+}
+
+.theme-btn:hover {
+  background-color: #f0f0f0;
+  transform: rotate(15deg); /* Легкий поворот при наведенні */
 }
 
 .logo {
@@ -39,6 +70,11 @@ nav ul {
   display: flex;
   margin: 0;
   padding: 0;
+  top: 100%; /* Меню випадає рівно під хедером */
+  left: 0;
+  width: 100%;
+  /* Додамо трохи відступу зверху, щоб не налізало на лінії */
+  margin-top: 10px;
 }
 
 nav ul li {
@@ -447,12 +483,6 @@ footer a {
   }
   .burger-menu.active span:nth-child(3) {
     transform: rotate(-45deg) translate(5px, -6px);
-  }
-
-  /* Сховати кнопку теми на мобільному, якщо заважає, 
-     або зменшити відступи */
-  .theme-btn {
-    display: none; /* Тимчасово приховаємо для чистоти дизайну як в Figma */
   }
 
   /* 2. HERO SECTION (Головний блок) */

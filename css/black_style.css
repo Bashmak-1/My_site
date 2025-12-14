@@ -71,3 +71,43 @@ footer a {
 .theme-btn:hover {
   background-color: #444;
 }
+
+/* --- МОБІЛЬНЕ МЕНЮ В ТЕМНІЙ ТЕМІ --- */
+
+/* 1. Робимо рисочки гамбургера білими */
+.burger-menu span {
+  background-color: #ffffff;
+}
+
+/* 2. Фон випадаючого меню */
+/* Використовуємо !important або специфічність, щоб перебити style.css */
+@media (max-width: 768px) {
+  nav ul {
+    background-color: #1e1e1e; /* Темний фон */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5); /* Темна тінь */
+    border-top: 1px solid #333; /* Тонка лінія зверху */
+  }
+
+  /* Посилання в меню */
+  nav ul li a {
+    color: #e0e0e0;
+  }
+  
+  nav ul li a:hover, 
+  nav ul li a.active {
+    color: #ff4747; /* Активний колір (червоний) */
+    background-color: rgba(255, 255, 255, 0.05); /* Легка підсвітка пункту */
+  }
+}
+
+/* 3. Кнопка теми в темному режимі */
+.theme-btn {
+  border-color: #444;
+  color: #fff;
+  background-color: transparent;
+}
+
+.theme-btn:hover {
+  background-color: #333;
+  border-color: #fff;
+}
