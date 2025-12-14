@@ -11,7 +11,6 @@ body {
     font-family: Arial, sans-serif;
 }
 
-/* Анімація фону */
 .background-effect {
     position: absolute;
     top: 0;
@@ -30,8 +29,6 @@ body {
     width: 800px;
     height: 400px;
     z-index: 1;
-    /* Якщо треба опустити ВЕСЬ блок візуально нижче на екрані, розкоментуй це: */
-    /* top: 50px; */
 }
 
 .ground {
@@ -42,7 +39,7 @@ body {
     background: linear-gradient(to right, #2c3e50, #4ca1af);
     border-radius: 50%;
     box-shadow: 0 0 20px rgba(0,0,0,0.5);
-    z-index: 1; /* Земля позаду покемона, якщо дивитись знизу, але тут важливо позиціонування */
+    z-index: 1;
 }
 
 /* --- ГЕРОЇ ТА ОБ'ЄКТИ --- */
@@ -50,8 +47,8 @@ body {
 /* Контейнер для покемона */
 .pokemon-container {
     position: absolute;
-    /* БУЛО 40px, СТАЛО 70px — підняли, щоб не тонув у землі */
-    bottom: 70px; 
+    /* ПІДНЯЛИ НА 10px (було 70px -> стало 80px) */
+    bottom: 80px; 
     left: 50%;
     transform: translateX(-50%);
     width: 150px;
@@ -59,7 +56,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    z-index: 10; /* Покемон завжди зверху землі */
+    z-index: 10;
 }
 
 .pokemon {
@@ -68,14 +65,15 @@ body {
     background-size: contain;
     background-repeat: no-repeat;
     background-position: bottom center;
+    /* Основний цикл 30 секунд */
     animation: evolutionCycle 30s linear infinite;
 }
 
 /* Покебол */
 .pokeball-wrapper {
     position: absolute;
-    /* Також підняли, щоб приземлявся на рівень ніг покемона */
-    bottom: 70px;
+    /* ПІДНЯЛИ НА 10px */
+    bottom: 80px;
     left: 50%;
     width: 40px;
     height: 40px;
@@ -87,8 +85,7 @@ body {
 .pokeball-img {
     width: 100%;
     height: 100%;
-    /* Додай сюди URL своєї картинки покеболу, наприклад: url('../img/pokeball.png') */
-    background: red; 
+    background: red; /* ЗАМІНИТИ НА URL КАРТИНКИ */
     border-radius: 50%;
     border: 2px solid white;
     box-sizing: border-box;
@@ -99,8 +96,8 @@ body {
 /* Їжа */
 .food-wrapper {
     position: absolute;
-    /* Їжа летить трохи вище ніг */
-    bottom: 100px;
+    /* Їжа летить вище ніг */
+    bottom: 110px;
     left: 50%;
     width: 30px;
     height: 30px;
@@ -112,16 +109,15 @@ body {
 .food-img {
     width: 100%;
     height: 100%;
-    /* Додай сюди URL картинки їжі */
-    background: orange;
+    background: orange; /* ЗАМІНИТИ НА URL КАРТИНКИ */
     border-radius: 5px;
 }
 
 /* Ефект вибуху */
 .flash-effect {
     position: absolute;
-    /* Центр спалаху теж підняли */
-    bottom: 70px;
+    /* ПІДНЯЛИ НА 10px */
+    bottom: 80px;
     left: 50%;
     transform: translateX(-50%);
     width: 10px;
@@ -135,42 +131,66 @@ body {
     z-index: 20;
 }
 
-/* --- KEYFRAMES --- */
+/* --- KEYFRAMES (СЦЕНАРІЙ) --- */
+
+/* РОЗРАХУНОК ЧАСУ (Всього 30 сек):
+   0-10% (0-3с): Політ покебола.
+   10-36% (3-11с): LITTEN (Позує 8 секунд).
+   36-43% (11-13с): Еволюція 1 (Спалах).
+   43-70% (13-21с): TORRACAT (Позує 8 секунд).
+   70-76% (21-23с): Еволюція 2 (Спалах).
+   76-96% (23-29с): INCINEROAR (Позує 6 секунд).
+   96-100% (29-30с): Зникнення.
+*/
 
 @keyframes evolutionCycle {
     0%, 9% { opacity: 0; transform: scale(0); }
+    
+    /* --- LITTEN --- */
     10% { 
         opacity: 1; transform: scale(1);
         background-image: url('https://img.pokemondb.net/sprites/scarlet-violet/normal/litten.png');
         filter: brightness(1);
     }
-    30% {
+    36% { /* Стоїть до цього моменту */
         background-image: url('https://img.pokemondb.net/sprites/scarlet-violet/normal/litten.png');
         filter: brightness(1);
+        transform: scale(1);
     }
-    33% { filter: brightness(10); transform: scale(1.2); }
-    36% { 
-        background-image: url('https://img.pokemondb.net/sprites/scarlet-violet/normal/torracat.png');
-        filter: brightness(1); transform: scale(1);
+    
+    /* ЕВОЛЮЦІЯ 1 */
+    38% { filter: brightness(10); transform: scale(1.2); } /* Пік спалаху */
+    40% { background-image: url('https://img.pokemondb.net/sprites/scarlet-violet/normal/torracat.png'); } /* Підміна картинки в спалаху */
+    
+    /* --- TORRACAT --- */
+    43% { 
+        filter: brightness(1); transform: scale(1); /* Спалах згас */
     }
-    60% {
+    70% { /* Стоїть до цього моменту */
         background-image: url('https://img.pokemondb.net/sprites/scarlet-violet/normal/torracat.png');
         filter: brightness(1);
+        transform: scale(1);
     }
-    63% { filter: brightness(10); transform: scale(1.3); }
-    66% { 
-        background-image: url('https://img.pokemondb.net/sprites/scarlet-violet/normal/incineroar.png');
-        filter: brightness(1); transform: scale(1);
+    
+    /* ЕВОЛЮЦІЯ 2 */
+    72% { filter: brightness(10); transform: scale(1.3); } /* Пік спалаху */
+    74% { background-image: url('https://img.pokemondb.net/sprites/scarlet-violet/normal/incineroar.png'); } /* Підміна */
+
+    /* --- INCINEROAR --- */
+    76% {
+        filter: brightness(1); transform: scale(1); /* Спалах згас */
     }
-    90% { opacity: 1; transform: scale(1); }
-    95%, 100% { opacity: 0; transform: scale(0); }
+    96% { /* Стоїть до кінця */
+        opacity: 1; transform: scale(1);
+    }
+    98%, 100% { opacity: 0; transform: scale(0); }
 }
 
 @keyframes throwPokeball {
     0% { opacity: 1; transform: translate(400px, -300px); }
     8% { opacity: 1; transform: translate(0, 0); }
     9% { opacity: 1; transform: scale(1.5); }
-    10% { opacity: 0; transform: scale(0); }
+    10% { opacity: 0; transform: scale(0); } /* Зникає рівно коли з'являється Літтен */
     100% { opacity: 0; }
 }
 
@@ -178,26 +198,41 @@ body {
     100% { transform: rotate(360deg); }
 }
 
+/* Синхронізуємо їжу з моментами еволюції (38% і 72%) */
 @keyframes throwFoodSequence {
-    0%, 25% { opacity: 0; transform: translate(400px, -200px); }
-    28% { opacity: 1; transform: translate(400px, -200px); }
-    32% { opacity: 1; transform: translate(0, 20px); }
-    33% { opacity: 0; }
-    55% { opacity: 0; transform: translate(400px, -200px); }
-    58% { opacity: 1; transform: translate(400px, -200px); }
-    62% { opacity: 1; transform: translate(0, 20px); }
-    63% { opacity: 0; }
+    0%, 30% { opacity: 0; transform: translate(400px, -200px); }
+    
+    /* Кидок 1 (для Litten) - влучає десь на 37-38% */
+    33% { opacity: 1; transform: translate(400px, -200px); }
+    37% { opacity: 1; transform: translate(0, 20px); }
+    38% { opacity: 0; }
+
+    /* Кидок 2 (для Torracat) - влучає десь на 71-72% */
+    66% { opacity: 0; transform: translate(400px, -200px); }
+    68% { opacity: 1; transform: translate(400px, -200px); }
+    71% { opacity: 1; transform: translate(0, 20px); }
+    72% { opacity: 0; }
+    
     100% { opacity: 0; }
 }
 
+/* Синхронізуємо спалахи */
 @keyframes flashSequence {
+    /* Поява з покеболу */
     0%, 9% { opacity: 0; transform: translateX(-50%) scale(0); }
     10% { opacity: 1; transform: translateX(-50%) scale(20); }
     11% { opacity: 0; }
-    33% { opacity: 0.8; transform: translateX(-50%) scale(15); box-shadow: 0 0 50px yellow; }
-    34% { opacity: 0; }
-    63% { opacity: 0.8; transform: translateX(-50%) scale(20); box-shadow: 0 0 50px red; }
-    64% { opacity: 0; }
+    
+    /* Еволюція 1 (біля 38%) */
+    37% { opacity: 0; transform: translateX(-50%) scale(0); }
+    38% { opacity: 0.8; transform: translateX(-50%) scale(15); box-shadow: 0 0 50px yellow; }
+    40% { opacity: 0; }
+
+    /* Еволюція 2 (біля 72%) */
+    71% { opacity: 0; transform: translateX(-50%) scale(0); }
+    72% { opacity: 0.8; transform: translateX(-50%) scale(20); box-shadow: 0 0 50px red; }
+    74% { opacity: 0; }
+    
     100% { opacity: 0; }
 }
 
