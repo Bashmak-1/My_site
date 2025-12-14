@@ -24,9 +24,9 @@ body {
 /* HEADER */
 .header {
     display: flex;
-    align-items: flex-end; /* Вирівнювання по низу */
-    padding: 15px 20px;
-    border-bottom: 2px solid #000; /* Жирна лінія під шапкою */
+    align-items: flex-end; /* Вирівнювання елементів по низу */
+    padding: 15px 20px 5px 20px; /* Зменшили нижній відступ до 5px, щоб було ближче до лінії */
+    border-bottom: 2px solid #000;
 }
 
 .title-section h1 {
@@ -34,23 +34,37 @@ body {
     font-size: 3.5rem;
     text-transform: uppercase;
     line-height: 0.8;
-    margin-right: 30px;
+    margin-right: 0;
     font-weight: 500;
     letter-spacing: -1px;
+    
+    /* ЗМІНА ТУТ: піднімаємо текст на 15px вгору від лінії */
+    margin-bottom: 15px; 
 }
 
 .header-inputs {
     display: flex;
     flex-grow: 1;
-    justify-content: space-between;
-    align-items: flex-end;
-    padding-bottom: 5px;
+    align-items: flex-end; /* Притискаємо все до низу */
+    padding-bottom: 0;     /* Прибираємо внутрішній відступ, щоб опустити на лінію */
 }
 
+/* Група полів вводу */
 .input-group {
     display: flex;
-    align-items: center;
+    align-items: baseline; /* Вирівнюємо текст і лінію вводу по базовій лінії тексту */
     position: relative;
+    margin-bottom: 2px; /* Мікро-відступ від головної лінії */
+}
+
+/* WEEK OF - відсуваємо трохи від заголовка */
+.week-of {
+    margin-left: 40px; 
+}
+
+/* HEALTHY HABIT - відсуваємо від Week of */
+.habit {
+    margin-left: 60px;
 }
 
 .input-group label {
@@ -68,18 +82,23 @@ body {
     outline: none;
     font-size: 1rem;
     padding-left: 5px;
+    background: transparent;
+    line-height: 1; /* Зменшуємо висоту рядка вводу */
 }
 
 .habit input {
     width: 200px;
 }
 
+/* Чекбокси відштовхуємо в самий правий бік */
 .checkbox-group {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
     font-size: 0.7rem;
     font-weight: 700;
+    margin-left: auto; /* Ця магія штовхає блок в самий кінець праворуч */
+    padding-bottom: 2px;
 }
 
 .checkbox-group label {
