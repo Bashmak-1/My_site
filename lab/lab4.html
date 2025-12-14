@@ -3,91 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weekly Plan - Lab 4</title>
+    <title>Weekly Plan Lab 4</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="css/lab4_style.css">
 </head>
 <body>
 
-    <div class="planner-container">
+    <div class="planner-wrapper">
         <header class="header">
-            <h1>WEEKLY PLAN</h1>
-            <div class="week-of">
-                <label>WEEK OF:</label>
-                <input type="text" placeholder="Date...">
+            <div class="title-section">
+                <h1>WEEKLY PLAN</h1>
+            </div>
+            
+            <div class="header-inputs">
+                <div class="input-group week-of">
+                    <label>WEEK OF</label>
+                    <input type="text">
+                </div>
+                <div class="input-group habit">
+                    <label>HEALTHY HABIT</label>
+                    <input type="text">
+                </div>
+                <div class="checkbox-group">
+                    <label>ROCKED IT <input type="checkbox"></label>
+                    <label>ROOM FOR IMPROVEMENT <input type="checkbox"></label>
+                </div>
             </div>
         </header>
 
-        <section class="habit box">
-            <h3>HEALTHY HABIT</h3>
-            <input type="text" class="full-width-input" placeholder="Drink water...">
-            <div class="checkbox-group">
-                <label><input type="checkbox"> ROCKED IT</label>
-                <label><input type="checkbox"> ROOM FOR IMPROVEMENT</label>
+        <div class="main-grid">
+            
+            <aside class="sidebar">
+                <div class="sidebar-section goals">
+                    <div class="section-title">TOP 3 GOALS</div>
+                    <span class="todo-label">TO DO</span> 
+                    <ul>
+                        <li><input type="checkbox"><input type="text"></li>
+                        <li><input type="checkbox"><input type="text"></li>
+                        <li><input type="checkbox"><input type="text"></li>
+                    </ul>
+                </div>
+
+                <div class="sidebar-section everything-else">
+                    <div class="section-title">EVERYTHING ELSE</div>
+                    <ul>
+                        <li><input type="checkbox"><input type="text"></li>
+                        <li><input type="checkbox"><input type="text"></li>
+                        <li><input type="checkbox"><input type="text"></li>
+                        <li><input type="checkbox"><input type="text"></li>
+                        <li><input type="checkbox"><input type="text"></li>
+                        <li><input type="checkbox"><input type="text"></li>
+                        <li><input type="checkbox"><input type="text"></li>
+                        <li><input type="checkbox"><input type="text"></li>
+                        <li><input type="checkbox"><input type="text"></li>
+                        <li><input type="checkbox"><input type="text"></li>
+                        <li><input type="checkbox"><input type="text"></li>
+                        <li><input type="checkbox"><input type="text"></li>
+                    </ul>
+                </div>
+
+                <div class="sidebar-section next-week">
+                    <div class="section-title">NEXT WEEK</div>
+                    <ul>
+                        <li><input type="checkbox"><input type="text"></li>
+                        <li><input type="checkbox"><input type="text"></li>
+                        <li><input type="checkbox"><input type="text"></li>
+                        <li><input type="checkbox"><input type="text"></li>
+                    </ul>
+                </div>
+            </aside>
+
+            <div class="day-box monday">
+                <div class="day-header">MONDAY <input type="checkbox"></div>
+                <textarea></textarea>
             </div>
-        </section>
+            <div class="day-box tuesday">
+                <div class="day-header">TUESDAY <input type="checkbox"></div>
+                <textarea></textarea>
+            </div>
+            <div class="day-box wednesday">
+                <div class="day-header">WEDNESDAY <input type="checkbox"></div>
+                <textarea></textarea>
+            </div>
 
-        <section class="todo box">
-            <h3>TO DO</h3>
-            <ul>
-                <li><input type="checkbox"><input type="text"></li>
-                <li><input type="checkbox"><input type="text"></li>
-                <li><input type="checkbox"><input type="text"></li>
-                <li><input type="checkbox"><input type="text"></li>
-                <li><input type="checkbox"><input type="text"></li>
-            </ul>
-        </section>
+            <div class="day-box thursday">
+                <div class="day-header">THURSDAY <input type="checkbox"></div>
+                <textarea></textarea>
+            </div>
+            <div class="day-box friday">
+                <div class="day-header">FRIDAY <input type="checkbox"></div>
+                <textarea></textarea>
+            </div>
+            
+            <div class="weekend-column">
+                <div class="day-box saturday">
+                    <div class="day-header">SATURDAY <input type="checkbox"></div>
+                    <textarea></textarea>
+                </div>
+                <div class="day-box sunday">
+                    <div class="day-header">SUNDAY <input type="checkbox"></div>
+                    <textarea></textarea>
+                </div>
+            </div>
 
-        <section class="day monday box">
-            <h3>MONDAY</h3>
-            <textarea placeholder="Plan..."></textarea>
-        </section>
-        <section class="day tuesday box">
-            <h3>TUESDAY</h3>
-            <textarea placeholder="Plan..."></textarea>
-        </section>
-        <section class="day wednesday box">
-            <h3>WEDNESDAY</h3>
-            <textarea placeholder="Plan..."></textarea>
-        </section>
-
-        <section class="goals box">
-            <h3>TOP 3 GOALS</h3>
-            <div class="goal-item"><input type="checkbox"><input type="text" placeholder="Goal 1"></div>
-            <div class="goal-item"><input type="checkbox"><input type="text" placeholder="Goal 2"></div>
-            <div class="goal-item"><input type="checkbox"><input type="text" placeholder="Goal 3"></div>
-        </section>
-
-        <section class="day thursday box">
-            <h3>THURSDAY</h3>
-            <textarea placeholder="Plan..."></textarea>
-        </section>
-        <section class="day friday box">
-            <h3>FRIDAY</h3>
-            <textarea placeholder="Plan..."></textarea>
-        </section>
-        <section class="day saturday box">
-            <h3>SATURDAY</h3>
-            <textarea placeholder="Plan..."></textarea>
-        </section>
-        <section class="day sunday box">
-            <h3>SUNDAY</h3>
-            <textarea placeholder="Plan..."></textarea>
-        </section>
-
-        <section class="next-week box">
-            <h3>NEXT WEEK</h3>
-            <textarea placeholder="Notes for next week..."></textarea>
-        </section>
-
-        <section class="everything-else box">
-            <h3>EVERYTHING ELSE</h3>
-            <textarea placeholder="Notes..."></textarea>
-        </section>
+        </div>
     </div>
 
 </body>
-</html>
+</html> 
