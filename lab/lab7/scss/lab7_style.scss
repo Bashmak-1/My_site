@@ -1,0 +1,176 @@
+// --- 1. Змінні (Variables) ---
+$font-main: 'Roboto', sans-serif;
+$font-festive: 'Mountains of Christmas', cursive;
+
+$color-bg-gradient: linear-gradient(135deg, #1b2735 0%, #090a0f 100%);
+$color-card-bg: rgba(255, 255, 255, 0.1);
+$color-text-primary: #ffffff;
+$color-accent: #ff4757; // Червоний
+$color-tree-green: #2ecc71;
+$color-star: #f1c40f;
+
+$radius-large: 20px;
+$radius-small: 8px;
+
+// --- 2. Скидання та базові стилі ---
+body {
+    margin: 0;
+    padding: 0;
+    font-family: $font-main;
+    background: $color-bg-gradient;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: $color-text-primary;
+    overflow: hidden;
+}
+
+// --- 3. Блок .ny-card (BEM) ---
+.ny-card {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    padding: 20px;
+    
+    // Елемент: Контейнер картки (Glassmorphism ефект)
+    &__container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+        background: $color-card-bg;
+        backdrop-filter: blur(10px); // Розмиття фону
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: $radius-large;
+        padding: 40px;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+        
+        // Адаптивність через вкладеність SCSS
+        @media (max-width: 768px) {
+            flex-direction: column;
+            text-align: center;
+        }
+    }
+
+    // Елемент: Заголовок
+    &__title {
+        font-family: $font-festive;
+        font-size: 3rem;
+        margin-bottom: 15px;
+        line-height: 1.2;
+
+        // Модифікатор елемента (BEM: --highlight)
+        &--highlight {
+            color: $color-accent;
+            text-shadow: 0 0 10px rgba($color-accent, 0.6);
+        }
+    }
+
+    // Елемент: Текст привітання
+    &__text {
+        font-size: 1.1rem;
+        opacity: 0.9;
+        margin-bottom: 25px;
+        max-width: 350px;
+        line-height: 1.6;
+    }
+
+    // Елемент: Кнопка
+    &__button {
+        background-color: $color-accent;
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        font-size: 1rem;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        font-family: $font-main;
+        font-weight: 500;
+
+        &:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba($color-accent, 0.4);
+        }
+    }
+
+    // Елемент: Сніг (Анімація на фоні)
+    &__snow {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        background-image: 
+            radial-gradient(4px 4px at 100px 50px, #fff, transparent), 
+            radial-gradient(6px 6px at 200px 150px, #fff, transparent), 
+            radial-gradient(3px 3px at 300px 250px, #fff, transparent);
+        background-size: 200px 200px;
+        animation: snow 10s linear infinite;
+
+        &--blur {
+            filter: blur(3px);
+            animation-duration: 15s;
+            opacity: 0.6;
+        }
+    }
+}
+
+// --- 4. Блок .tree (Вкладений блок для ялинки) ---
+// Вставте це замість старого блоку .tree
+.tree--volume {
+    position: relative;
+    width: 160px;
+    height: 220px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .tree__star {
+        font-size: 2.5rem;
+        color: $color-star;
+        position: absolute;
+        top: -25px;
+        z-index: 10;
+        animation: glow 1.5s infinite alternate;
+        filter: drop-shadow(0 0 5px rgba($color-star, 0.5));
+    }
+
+    .tree__layer {
+        width: 100%;
+        // Градієнт для об'єму
+        background: linear-gradient(165deg, lighten($color-tree-green, 15%) 0%, $color-tree-green 100%);
+        // Вирізаємо трикутник
+        clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        margin-bottom: -40px; // Сильніше накладання
+        filter: drop-shadow(0 5px 5px rgba(0,0,0,0.2)); // Тінь для кожного шару
+
+        // Розміри та кольори для кожного шару
+        &--top { width: 90px; height: 80px; z-index: 3; background: linear-gradient(165deg, lighten($color-tree-green, 25%), lighten($color-tree-green, 10%)); }
+        &--middle { width: 130px; height: 100px; z-index: 2; background: linear-gradient(165deg, lighten($color-tree-green, 15%), $color-tree-green); }
+        &--bottom { width: 170px; height: 120px; z-index: 1; background: linear-gradient(165deg, lighten($color-tree-green, 5%), darken($color-tree-green, 5%)); }
+    }
+
+    .tree__trunk {
+        width: 34px;
+        height: 50px;
+        background: linear-gradient(to right, #5d4037, #4e342e);
+        margin-top: 5px;
+        border-radius: 0 0 5px 5px;
+        position: relative;
+        z-index: 0;
+    }
+}
+
+// --- 5. Анімації (Keyframes) ---
+@keyframes snow {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(100vh); }
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 5px $color-star; transform: scale(1); }
+    to { text-shadow: 0 0 20px $color-star; transform: scale(1.2); }
+}
