@@ -1,0 +1,207 @@
+/* --- ЗАГАЛЬНІ НАЛАШТУВАННЯ ТА ФОН --- */
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+}
+
+/* Анімація фону */
+.background-effect {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 100%;
+    background-image: url('https://www.transparenttextures.com/patterns/stardust.png');
+    opacity: 0.5;
+    animation: moveStars 100s linear infinite;
+    z-index: 0;
+}
+
+/* Сцена */
+.stage {
+    position: relative;
+    width: 800px;
+    height: 400px;
+    z-index: 1;
+    /* Якщо треба опустити ВЕСЬ блок візуально нижче на екрані, розкоментуй це: */
+    /* top: 50px; */
+}
+
+.ground {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    background: linear-gradient(to right, #2c3e50, #4ca1af);
+    border-radius: 50%;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    z-index: 1; /* Земля позаду покемона, якщо дивитись знизу, але тут важливо позиціонування */
+}
+
+/* --- ГЕРОЇ ТА ОБ'ЄКТИ --- */
+
+/* Контейнер для покемона */
+.pokemon-container {
+    position: absolute;
+    /* БУЛО 40px, СТАЛО 70px — підняли, щоб не тонув у землі */
+    bottom: 70px; 
+    left: 50%;
+    transform: translateX(-50%);
+    width: 150px;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    z-index: 10; /* Покемон завжди зверху землі */
+}
+
+.pokemon {
+    width: 100%;
+    height: 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: bottom center;
+    animation: evolutionCycle 30s linear infinite;
+}
+
+/* Покебол */
+.pokeball-wrapper {
+    position: absolute;
+    /* Також підняли, щоб приземлявся на рівень ніг покемона */
+    bottom: 70px;
+    left: 50%;
+    width: 40px;
+    height: 40px;
+    animation: throwPokeball 30s linear infinite;
+    opacity: 0;
+    z-index: 11;
+}
+
+.pokeball-img {
+    width: 100%;
+    height: 100%;
+    /* Додай сюди URL своєї картинки покеболу, наприклад: url('../img/pokeball.png') */
+    background: red; 
+    border-radius: 50%;
+    border: 2px solid white;
+    box-sizing: border-box;
+    background-image: linear-gradient(to bottom, red 50%, white 50%);
+    animation: spinBall 1s linear infinite;
+}
+
+/* Їжа */
+.food-wrapper {
+    position: absolute;
+    /* Їжа летить трохи вище ніг */
+    bottom: 100px;
+    left: 50%;
+    width: 30px;
+    height: 30px;
+    opacity: 0;
+    animation: throwFoodSequence 30s linear infinite;
+    z-index: 12;
+}
+
+.food-img {
+    width: 100%;
+    height: 100%;
+    /* Додай сюди URL картинки їжі */
+    background: orange;
+    border-radius: 5px;
+}
+
+/* Ефект вибуху */
+.flash-effect {
+    position: absolute;
+    /* Центр спалаху теж підняли */
+    bottom: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10px;
+    height: 10px;
+    background: white;
+    border-radius: 50%;
+    opacity: 0;
+    box-shadow: 0 0 20px white, 0 0 40px cyan;
+    animation: flashSequence 30s linear infinite;
+    pointer-events: none;
+    z-index: 20;
+}
+
+/* --- KEYFRAMES --- */
+
+@keyframes evolutionCycle {
+    0%, 9% { opacity: 0; transform: scale(0); }
+    10% { 
+        opacity: 1; transform: scale(1);
+        background-image: url('https://img.pokemondb.net/sprites/scarlet-violet/normal/litten.png');
+        filter: brightness(1);
+    }
+    30% {
+        background-image: url('https://img.pokemondb.net/sprites/scarlet-violet/normal/litten.png');
+        filter: brightness(1);
+    }
+    33% { filter: brightness(10); transform: scale(1.2); }
+    36% { 
+        background-image: url('https://img.pokemondb.net/sprites/scarlet-violet/normal/torracat.png');
+        filter: brightness(1); transform: scale(1);
+    }
+    60% {
+        background-image: url('https://img.pokemondb.net/sprites/scarlet-violet/normal/torracat.png');
+        filter: brightness(1);
+    }
+    63% { filter: brightness(10); transform: scale(1.3); }
+    66% { 
+        background-image: url('https://img.pokemondb.net/sprites/scarlet-violet/normal/incineroar.png');
+        filter: brightness(1); transform: scale(1);
+    }
+    90% { opacity: 1; transform: scale(1); }
+    95%, 100% { opacity: 0; transform: scale(0); }
+}
+
+@keyframes throwPokeball {
+    0% { opacity: 1; transform: translate(400px, -300px); }
+    8% { opacity: 1; transform: translate(0, 0); }
+    9% { opacity: 1; transform: scale(1.5); }
+    10% { opacity: 0; transform: scale(0); }
+    100% { opacity: 0; }
+}
+
+@keyframes spinBall {
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes throwFoodSequence {
+    0%, 25% { opacity: 0; transform: translate(400px, -200px); }
+    28% { opacity: 1; transform: translate(400px, -200px); }
+    32% { opacity: 1; transform: translate(0, 20px); }
+    33% { opacity: 0; }
+    55% { opacity: 0; transform: translate(400px, -200px); }
+    58% { opacity: 1; transform: translate(400px, -200px); }
+    62% { opacity: 1; transform: translate(0, 20px); }
+    63% { opacity: 0; }
+    100% { opacity: 0; }
+}
+
+@keyframes flashSequence {
+    0%, 9% { opacity: 0; transform: translateX(-50%) scale(0); }
+    10% { opacity: 1; transform: translateX(-50%) scale(20); }
+    11% { opacity: 0; }
+    33% { opacity: 0.8; transform: translateX(-50%) scale(15); box-shadow: 0 0 50px yellow; }
+    34% { opacity: 0; }
+    63% { opacity: 0.8; transform: translateX(-50%) scale(20); box-shadow: 0 0 50px red; }
+    64% { opacity: 0; }
+    100% { opacity: 0; }
+}
+
+@keyframes moveStars {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
