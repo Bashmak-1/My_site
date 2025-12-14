@@ -310,3 +310,75 @@ footer a {
 .theme-btn:hover {
   background-color: #e0e0e0;
 }
+
+/* --- АНІМАЦІЯ КОТА (FLIP + SHAKE) --- */
+
+/* 1. Задаємо розміри контейнера і робимо його круглим */
+.hero-image {
+  width: 250px;
+  height: 250px;
+  /* Це важливо, щоб елементи не вилазили за межі */
+  position: relative; 
+  z-index: 10;
+}
+
+.flip-container {
+  width: 100%;
+  height: 100%;
+  perspective: 1000px;
+  border-radius: 50%; /* Робить контейнер круглим */
+}
+
+/* 2. Налаштування самої картки */
+.flip-card {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  position: relative;
+  border-radius: 50%; /* Картка теж кругла */
+}
+
+/* Перевертання при наведенні */
+.flip-container:hover .flip-card {
+  transform: rotateY(180deg);
+}
+
+/* 3. Стилі для передньої та задньої сторін */
+.flip-front, .flip-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%; /* Сторони теж круглі */
+  backface-visibility: hidden; /* Ховаємо задню частину */
+  overflow: hidden; /* Обрізаємо картинки по колу */
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15); /* Тінь для краси */
+}
+
+/* Налаштування картинок всередині */
+.flip-front img, .flip-back img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/* Задня сторона (Кіт) спочатку перевернута */
+.flip-back {
+  transform: rotateY(180deg);
+  background-color: #fff; /* Фон під котом, якщо картинка прозора */
+}
+
+/* 4. Анімація тряски (SHAKE) */
+/* Вмикається, коли ми наводимо мишку на контейнер */
+.flip-container:hover .angry-cat {
+  animation: shake 0.5s infinite;
+}
+
+@keyframes shake {
+  0% { transform: translate(0, 0) rotate(0deg) scale(1.1); } /* scale(1.1) щоб при трясці не було видно країв */
+  25% { transform: translate(5px, 5px) rotate(5deg) scale(1.1); }
+  50% { transform: translate(-5px, -5px) rotate(-5deg) scale(1.1); }
+  75% { transform: translate(5px, -5px) rotate(5deg) scale(1.1); }
+  100% { transform: translate(0, 0) rotate(0deg) scale(1.1); }
+}
