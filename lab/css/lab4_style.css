@@ -220,11 +220,24 @@ body {
 /* --- DAYS (Grid Items) --- */
 .day-header {
     display: flex;
-    justify-content: space-between;
+    justify-content: center; /* Центруємо текст по горизонталі */
+    align-items: center;     /* Центруємо по вертикалі */
+    position: relative;      /* Це важливо: чекбокс буде рівнятись відносно цього блоку */
+    
     font-size: 0.75rem;
     font-weight: 700;
     text-transform: uppercase;
     margin-bottom: 10px;
+    height: 20px;            /* Фіксуємо висоту, щоб чекбокс не стрибав */
+}
+
+/* Чекбокс вириваємо з потоку і ставимо в куток */
+.day-header input[type="checkbox"] {
+    position: absolute;      /* Абсолютне позиціювання */
+    right: 0;                /* Притискаємо до правого краю */
+    top: 0;
+    margin: 0;
+    cursor: pointer;
 }
 
 textarea {
@@ -244,23 +257,44 @@ textarea {
 .thursday { grid-column: 2; grid-row: 2; border-bottom: none; }
 .friday { grid-column: 3; grid-row: 2; border-bottom: none; }
 
-/* WEEKEND COLUMN (Sat & Sun stacked) */
+/* --- WEEKEND COLUMN (Sat & Sun stacked) --- */
 .weekend-column {
     grid-column: 4;
     grid-row: 2;
+    
+    /* Робимо цей блок Flex-контейнером */
     display: flex;
     flex-direction: column;
-    padding: 0; /* Прибираємо паддінг контейнера, щоб лінії стикалися */
-    border-bottom: none;
+    
+    /* ВАЖЛИВО: розтягуємо на всю доступну висоту Grid-клітинки */
+    height: 100%; 
+    min-height: 0; /* Виправлення для коректної роботи Flexbox у деяких браузерах */
+    
+    /* Примусово прибираємо відступи та границі контейнера, щоб не було подвійних рамок */
+    padding: 0 !important; 
+    border-bottom: none !important;
+    border-right: none !important;
 }
 
+/* Стилі для блоків Суботи та Неділі всередині колонки */
 .weekend-column .day-box {
-    border-right: none;
-    border-bottom: 1px solid #999;
-    flex: 1; /* Кожен займає 50% висоти */
-    height: 50%;
+    flex: 1; /* Змушує обидва блоки ділити простір порівну (50/50) */
+    width: 100%;
+    
+    border-right: none; /* Справа рамка не потрібна */
+    padding: 10px;      /* Повертаємо внутрішні відступи для тексту */
+    
+    /* Гарантуємо, що контент не розтягне блок */
+    overflow: hidden;
+    position: relative;
 }
 
+/* Лінія розділення між Суботою та Неділею */
+.weekend-column .saturday {
+    border-bottom: 1px solid #999;
+}
+
+/* У Неділі знизу рамка не потрібна (її дає головна рамка планера) */
 .weekend-column .sunday {
     border-bottom: none;
 }
