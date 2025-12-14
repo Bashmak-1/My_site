@@ -1,130 +1,172 @@
 <!DOCTYPE html>
 <html lang="uk">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Практичні роботи</title>
-    <link rel="stylesheet" href="css/style.css" />
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        padding: 18px;
-        max-width: 900px;
-        margin: auto;
-      }
-      h1 {
-        margin-bottom: 8px;
-      }
-      #status {
-        color: #666;
-        margin-bottom: 12px;
-      }
-      ul {
-        padding-left: 20px;
-      }
-      li {
-        margin: 6px 0;
-      }
-      a {
-        text-decoration: none;
-      }
-    </style>
-  </head>
-  <body>
-    <header>
-      <h1>Практичні роботи</h1>
-      <nav>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Практичні роботи</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+  <link id="theme-style" rel="stylesheet" href="" />
+</head>
+<body>
+
+  <header>
+    <div class="container header-container">
+      <div class="logo">Барабаш Володимир</div>
+      
+      <nav id="nav-menu">
         <ul>
           <li><a href="index.html">Головна</a></li>
-          <li><a href="practicals.html">Практичні роботи</a></li>
-          <li><a href="labs.html">Лабораторки</a></li>
+          <li><a href="#about">Про мене</a></li>
+          <li><a href="labs.html">Лабораторні</a></li>
+          <li><a href="practicals.html" class="active">Практичні</a></li>
         </ul>
       </nav>
-    </header>
-    <h3>Статус:</h3>
-    <div id="status">Завантаження…</div>
-    <ul id="list"></ul>
 
-    <script>
-      // Налаштування (за потреби змініть)
-      const OWNER = "Bashmak-1"; // ваш GitHub user/org
-      const REPO = "My_site"; // ваш репозиторій
-      const FOLDER = "practical"; // папка з практичними у репозиторії
-      const API_URL = `https://api.github.com/repos/${OWNER}/${REPO}/contents/${FOLDER}`;
+      <div class="header-controls">
+        <button id="theme-toggle" class="theme-btn" aria-label="Toggle Theme">🌙</button>
+        <div class="burger-menu" id="burger-menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+  </header>
 
-      const statusEl = document.getElementById("status");
-      const listEl = document.getElementById("list");
+  <main class="container">
+    <section class="labs-section">
+      <div class="section-header">
+        <h1>Всі практичні роботи</h1>
+      </div>
+      
+      <div id="status">Завантаження списку з GitHub...</div>
+      
+      <div class="cards-grid" id="list"></div>
+    </section>
+  </main>
 
-      async function fetchFiles() {
-        try {
-          const res = await fetch(API_URL);
-          if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
-          const items = await res.json();
-          const files = (items || [])
-            .filter(
-              (i) => i.type === "file" && i.name.toLowerCase().endsWith(".html")
-            )
-            .sort((a, b) =>
-              a.name.localeCompare(b.name, undefined, { numeric: true })
-            );
-          if (files.length === 0) {
-            statusEl.textContent =
-              "Файлів .html не знайдено у папці " + FOLDER + ".";
-            return;
-          }
-          statusEl.textContent = `${files.length} файл(ів) знайдено.`;
-          for (const file of files) {
-            const li = document.createElement("li");
-            // відносне посилання на HTML у сайті — працює на GitHub Pages
-            const relHref = `${FOLDER}/${encodeURIComponent(file.name)}`;
-            const a = document.createElement("a");
-            a.href = relHref;
-            a.textContent = file.name;
-            a.title = file.name;
-            // Спробуємо отримати "кращий" заголовок для відображення (title або перший h1)
-            // отримуємо спочатку відносний файл (швидше на GitHub Pages), якщо не працює — з file.download_url
-            try {
-              const r = await fetch(relHref);
-              if (r.ok) {
-                const text = await r.text();
-                const t = extractTitle(text) || extractH1(text);
-                if (t) {
-                  a.textContent = t;
-                  a.title = file.name;
-                }
-              } else if (file.download_url) {
-                const r2 = await fetch(file.download_url);
-                if (r2.ok) {
-                  const text2 = await r2.text();
-                  const t2 = extractTitle(text2) || extractH1(text2);
-                  if (t2) {
-                    a.textContent = t2;
-                    a.title = file.name;
-                  }
-                }
-              }
-            } catch (e) {
-              // ігноруємо помилки отримання окремих файлів — лишаємо ім'я файлу
-            }
-            li.appendChild(a);
-            listEl.appendChild(li);
-          }
-        } catch (err) {
-          statusEl.textContent =
-            "Помилка при зверненні до GitHub API: " + err.message;
+  <footer>
+    <p>© 2025 Барабаш Володимир | <a href="https://github.com/Bashmak-1">GitHub</a></p>
+  </footer>
+
+  <script>
+    // Тема та Меню
+    const toggleBtn = document.getElementById('theme-toggle');
+    const themeLink = document.getElementById('theme-style');
+    const darkThemePath = 'css/black_style.css';
+
+    if (localStorage.getItem('theme') === 'dark') {
+      themeLink.href = darkThemePath;
+      toggleBtn.innerText = '☀️';
+    } else {
+      toggleBtn.innerText = '🌙';
+    }
+
+    toggleBtn.addEventListener('click', () => {
+      if (themeLink.getAttribute('href') !== darkThemePath) {
+        themeLink.href = darkThemePath;
+        toggleBtn.innerText = '☀️';
+        localStorage.setItem('theme', 'dark');
+      } else {
+        themeLink.href = '';
+        toggleBtn.innerText = '🌙';
+        localStorage.setItem('theme', 'light');
+      }
+    });
+
+    const burgerBtn = document.getElementById('burger-menu');
+    const navMenu = document.getElementById('nav-menu');
+
+    burgerBtn.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+      burgerBtn.classList.toggle('active');
+    });
+  </script>
+
+  <script>
+    const OWNER = "Bashmak-1";
+    const REPO = "My_site";
+    const FOLDER = "practical"; // ВАЖЛИВО: папка practical
+    const API_URL = `https://api.github.com/repos/${OWNER}/${REPO}/contents/${FOLDER}`;
+
+    const statusEl = document.getElementById("status");
+    const listEl = document.getElementById("list");
+
+    async function fetchFiles() {
+      try {
+        const res = await fetch(API_URL);
+        if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
+        const items = await res.json();
+        
+        const files = (items || [])
+          .filter(i => i.type === "file" && i.name.toLowerCase().endsWith(".html"))
+          .sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true }));
+
+        if (files.length === 0) {
+          statusEl.textContent = "Файлів не знайдено.";
+          return;
         }
-      }
 
-      function extractTitle(html) {
-        const m = html.match(/<title[^>]*>([\s\S]*?)<\/title>/i);
-        return m ? m[1].trim() : null;
-      }
-      function extractH1(html) {
-        const m = html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i);
-        return m ? m[1].replace(/<[^>]+>/g, "").trim() : null;
-      }
+        statusEl.style.display = 'none';
 
-      document.addEventListener("DOMContentLoaded", fetchFiles);
-    </script>
-  </body>
+        for (const file of files) {
+          // Використовуємо той самий стиль карток
+          const card = document.createElement("div");
+          card.className = "card";
+
+          const relHref = `${FOLDER}/${encodeURIComponent(file.name)}`;
+          
+          const h3 = document.createElement("h3");
+          h3.textContent = file.name;
+
+          const p = document.createElement("p");
+          p.textContent = "Практична робота з HTML/CSS"; // Можна змінити текст
+          p.style.fontSize = "0.9rem";
+          p.style.color = "#888";
+
+          const a = document.createElement("a");
+          a.href = relHref;
+          a.className = "card-link";
+          a.title = file.name;
+
+          try {
+            const r = await fetch(relHref);
+            if (r.ok) {
+              const text = await r.text();
+              const t = extractTitle(text) || extractH1(text);
+              if (t) h3.textContent = t;
+            } else if (file.download_url) {
+              const r2 = await fetch(file.download_url);
+              if (r2.ok) {
+                const text2 = await r2.text();
+                const t2 = extractTitle(text2) || extractH1(text2);
+                if (t2) h3.textContent = t2;
+              }
+            }
+          } catch (e) {}
+
+          card.appendChild(h3);
+          card.appendChild(p);
+          card.appendChild(a);
+          listEl.appendChild(card);
+        }
+      } catch (err) {
+        statusEl.textContent = "Помилка GitHub API: " + err.message;
+      }
+    }
+
+    function extractTitle(html) {
+      const m = html.match(/<title[^>]*>([\s\S]*?)<\/title>/i);
+      return m ? m[1].trim() : null;
+    }
+    function extractH1(html) {
+      const m = html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i);
+      return m ? m[1].replace(/<[^>]+>/g, "").trim() : null;
+    }
+
+    document.addEventListener("DOMContentLoaded", fetchFiles);
+  </script>
+</body>
 </html>
