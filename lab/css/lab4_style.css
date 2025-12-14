@@ -281,15 +281,12 @@ textarea {
     grid-column: 4;
     grid-row: 2;
     
-    /* Робимо цей блок Flex-контейнером */
     display: flex;
     flex-direction: column;
     
-    /* ВАЖЛИВО: розтягуємо на всю доступну висоту Grid-клітинки */
     height: 100%; 
-    min-height: 0; /* Виправлення для коректної роботи Flexbox у деяких браузерах */
+    min-height: 0; 
     
-    /* Примусово прибираємо відступи та границі контейнера, щоб не було подвійних рамок */
     padding: 0 !important; 
     border-bottom: none !important;
     border-right: none !important;
@@ -297,25 +294,27 @@ textarea {
 
 /* Стилі для блоків Суботи та Неділі всередині колонки */
 .weekend-column .day-box {
-    flex: 1; /* Змушує обидва блоки ділити простір порівну (50/50) */
+    flex: 1;
     width: 100%;
     
-    border-right: none; /* Справа рамка не потрібна */
-    padding: 10px;      /* Повертаємо внутрішні відступи для тексту */
+    border-right: none; 
+    /* ВАЖЛИВО: прибираємо нижню рамку за замовчуванням для обох, 
+       щоб налаштувати її вручну нижче */
+    border-bottom: none; 
     
-    /* Гарантуємо, що контент не розтягне блок */
-    overflow: hidden;
+    padding: 10px;
     position: relative;
+    min-height: 0; 
 }
 
-/* Лінія розділення між Суботою та Неділею */
-.weekend-column .saturday {
-    border-bottom: 1px solid #999;
-}
-
-/* У Неділі знизу рамка не потрібна (її дає головна рамка планера) */
+/* Лінія розділення: тепер ми робимо її ЯК ВЕРХНЮ РАМКУ НЕДІЛІ */
 .weekend-column .sunday {
-    border-bottom: none;
+    border-top: 1px solid #999; /* Ось наша лінія */
+}
+
+/* Суботі спеціальна рамка не потрібна, бо лінію малює Неділя зверху */
+.weekend-column .saturday {
+    /* Додаткових стилів не треба */
 }
 
 /* --- MOBILE RESPONSIVE --- */
