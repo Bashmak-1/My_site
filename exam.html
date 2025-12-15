@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Екзамен - Білет 27</title>
+  <link rel="stylesheet" href="css/style.css">
+  
+  <style>
+    /* Центруємо все для зручної демонстрації викладачу */
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-color: #f4f4f4;
+      font-family: Arial, sans-serif;
+    }
+    
+    .exam-container {
+      background: white;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    h2 { margin-bottom: 20px; }
+
+    /* ================================================================
+       БІЛЕТ 27 (Барабаш)
+       Практичне завдання: Реалізувати анімовану іконку для кнопки меню бургер.
+       ================================================================
+    */
+
+    /* Стилі для кнопки */
+    .burger-menu {
+      display: flex;        /* Використовуємо flex для вирівнювання ліній */
+      flex-direction: column; 
+      justify-content: space-between;
+      width: 40px;          /* Ширина кнопки */
+      height: 30px;         /* Висота кнопки */
+      cursor: pointer;      /* Курсор як при кліку */
+      margin: 0 auto;       /* Центрування */
+      z-index: 100;
+    }
+
+    /* Стилі для самих ліній (span) */
+    .burger-menu span {
+      display: block;
+      width: 100%;
+      height: 4px;          /* Товщина лінії */
+      background-color: #333; /* Колір ліній */
+      border-radius: 2px;
+      
+      /* ГОЛОВНЕ ДЛЯ АНІМАЦІЇ: */
+      transition: all 0.4s ease-in-out; /* Плавність змін за 0.4 сек */
+      transform-origin: left center;    /* Точка обертання (зліва) */
+    }
+
+    /* --- АКТИВНИЙ СТАН (Коли натиснули) --- */
+    
+    /* 1. Верхня лінія: повертається на 45 градусів */
+    .burger-menu.active span:nth-child(1) {
+      transform: rotate(45deg) translate(0px, -2px); 
+      /* translate підганяє позицію, щоб утворився ідеальний хрестик */
+      transform-origin: center; /* Змінюємо точку обертання на центр */
+    }
+
+    /* 2. Середня лінія: зникає (прозорість 0) і трохи зменшується */
+    .burger-menu.active span:nth-child(2) {
+      opacity: 0;
+      transform: scale(0);
+    }
+
+    /* 3. Нижня лінія: повертається на -45 градусів */
+    .burger-menu.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(0px, 2px);
+      transform-origin: center;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="exam-container">
+    <h2>Білет 27 (Барабаш)</h2>
+    <p>Завдання: Анімована іконка бургер-меню</p>
+    <br>
+
+    <div class="burger-menu" id="burger-menu">
+      <span></span> <span></span> <span></span> </div>
+
+    <p style="margin-top: 20px; color: #666; font-size: 0.9em;">Натисніть на іконку</p>
+  </div>
+
+  <script>
+    // JS частина завдання: Додавання класу 'active' при кліку
+    const burger = document.getElementById('burger-menu');
+
+    burger.addEventListener('click', function() {
+      // toggle додає клас, якщо його немає, і видаляє, якщо є
+      this.classList.toggle('active');
+    });
+  </script>
+
+</body>
+</html>
